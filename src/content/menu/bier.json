@@ -9,8 +9,6 @@
   "dishes": [
     {
       "name": "Kaiser Bier",
-      "name_en": "Kaiser beer (draught)",
-      "name_nl": "Kaiser bier (van de tap)",
       "price": "4,10",
       "size": "0,3 l",
       "price2": "5,90",
@@ -19,12 +17,12 @@
       "tags": [],
       "recommended": false,
       "soldOut": false,
-      "hidden": false
+      "hidden": false,
+      "name_en": "Kaiser beer (draught)",
+      "name_nl": "Kaiser bier (van de tap)"
     },
     {
       "name": "Radler",
-      "name_en": "Radler (beer with lemonade)",
-      "name_nl": "Radler (bier met limonade)",
       "price": "4,10",
       "size": "0,3 l",
       "price2": "5,90",
@@ -33,67 +31,90 @@
       "tags": [],
       "recommended": false,
       "soldOut": false,
-      "hidden": false
+      "hidden": false,
+      "name_en": "Radler (beer with lemonade)",
+      "name_nl": "Radler (bier met limonade)"
     },
     {
       "name": "Alkoholfreies Bier",
-      "name_en": "Alcohol-free beer",
-      "name_nl": "Alcoholvrij bier",
       "price": "5,90",
       "size": "0,5 l",
       "allergens": [],
       "tags": [],
       "recommended": false,
       "soldOut": false,
-      "hidden": false
+      "hidden": false,
+      "name_en": "Alcohol-free beer",
+      "name_nl": "Alcoholvrij bier"
     },
     {
       "name": "Weißbier",
-      "name_en": "Wheat beer",
-      "name_nl": "Witbier",
       "price": "5,90",
       "size": "0,5 l",
       "allergens": [],
       "tags": [],
       "recommended": false,
       "soldOut": false,
-      "hidden": false
+      "hidden": false,
+      "name_en": "Wheat beer",
+      "name_nl": "Witbier"
     },
     {
       "name": "Alkoholfreies Weißbier",
-      "name_en": "Alcohol-free wheat beer",
-      "name_nl": "Alcoholvrij witbier",
       "price": "5,90",
       "size": "0,5 l",
       "allergens": [],
       "tags": [],
       "recommended": false,
       "soldOut": false,
-      "hidden": false
+      "hidden": false,
+      "name_en": "Alcohol-free wheat beer",
+      "name_nl": "Alcoholvrij witbier"
     },
     {
       "name": "Dunkles Weizen",
-      "name_en": "Dark wheat beer",
-      "name_nl": "Donker weizenbier",
       "price": "5,90",
       "size": "0,5 l",
       "allergens": [],
       "tags": [],
       "recommended": false,
       "soldOut": false,
-      "hidden": false
+      "hidden": false,
+      "name_en": "Dark wheat beer",
+      "name_nl": "Donker weizenbier"
     },
     {
       "name": "Kaiser Bier",
-      "name_en": "Special Bier",
-      "name_nl": "Speciaalbier",
       "price": "4,10",
       "size": "0,33",
       "allergens": [],
       "tags": [],
       "recommended": false,
       "soldOut": false,
-      "hidden": false
+      "hidden": false,
+      "name_en": "Special Bier",
+      "name_nl": "Speciaalbier"
+    },
+    {
+      "name": "test bier",
+      "description": "dsvsdv",
+      "image": "/src/assets/images/dishes/bier/dishes/7/image.jpg",
+      "price": "3",
+      "size": "0,3",
+      "price2": "5",
+      "size2": "1",
+      "allergens": [],
+      "tags": [
+        "spicy"
+      ],
+      "recommended": true,
+      "soldOut": false,
+      "hidden": false,
+      "name_en": "Test",
+      "description_en": "sdvsdv",
+      "name_nl": "Test",
+      "description_nl": "dsvsv",
+      "group": "Getänke"
     }
   ]
 }
