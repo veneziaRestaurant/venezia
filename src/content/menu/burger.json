@@ -6,22 +6,11 @@
   "hidden": false,
   "kind": "food",
   "image": "/src/assets/images/categories/burger/image.jpg",
-  "note": "",
-  "note_en": "",
   "dishes": [
     {
       "name": "Crunchy Chicken Burger",
       "description": "Hühnerfleisch mit Pommes, Tomaten, Salat, Zwiebel, Ketchup und Mayonnaise",
-      "name_en": "Crunchy chicken burger",
-      "description_en": "chicken with french fries, tomatoes, lettuce, onion, ketchup and mayonnaise",
-      "name_nl": "Crunchy chickenburger",
-      "description_nl": "kip met friet, tomaat, sla, ui, ketchup en mayonaise",
-      "group": "",
-      "group_en": "",
       "price": "15,80",
-      "size": "",
-      "price2": "",
-      "size2": "",
       "allergens": [
         "L",
         "M"
@@ -30,21 +19,16 @@
       "recommended": false,
       "soldOut": false,
       "hidden": false,
-      "image": null
+      "name_en": "Crunchy chicken burger",
+      "description_en": "chicken with french fries, tomatoes, lettuce, onion, ketchup and mayonnaise",
+      "name_nl": "Crunchy chickenburger",
+      "description_nl": "kip met friet, tomaat, sla, ui, ketchup en mayonaise"
     },
     {
       "name": "Cheeseburger",
       "description": "mit Pommes, Tomaten, Salat, Zwiebel, Ketchup und Mayonnaise",
-      "name_en": "Cheeseburger",
-      "description_en": "with french fries, tomatoes, lettuce, onion, ketchup and mayonnaise",
-      "name_nl": "Cheeseburger",
-      "description_nl": "met friet, tomaat, sla, ui, ketchup en mayonaise",
-      "group": "",
-      "group_en": "",
+      "image": "/src/assets/images/dishes/burger/dishes/1/image.jpg",
       "price": "16,90",
-      "size": "",
-      "price2": "",
-      "size2": "",
       "allergens": [
         "L",
         "M"
@@ -53,21 +37,15 @@
       "recommended": false,
       "soldOut": false,
       "hidden": false,
-      "image": "/src/assets/images/dishes/burger/dishes/1/image.jpg"
+      "name_en": "Cheeseburger",
+      "description_en": "with french fries, tomatoes, lettuce, onion, ketchup and mayonnaise",
+      "name_nl": "Cheeseburger",
+      "description_nl": "met friet, tomaat, sla, ui, ketchup en mayonaise"
     },
     {
       "name": "Hamburger",
       "description": "mit Pommes, Tomaten, Salat, Zwiebel, Ketchup und Mayonnaise",
-      "name_en": "Hamburger",
-      "description_en": "with french fries, tomatoes, lettuce, onion, ketchup and mayonnaise",
-      "name_nl": "Hamburger",
-      "description_nl": "met friet, tomaat, sla, ui, ketchup en mayonaise",
-      "group": "",
-      "group_en": "",
       "price": "15,20",
-      "size": "",
-      "price2": "",
-      "size2": "",
       "allergens": [
         "L",
         "M"
@@ -76,21 +54,15 @@
       "recommended": false,
       "soldOut": false,
       "hidden": false,
-      "image": null
+      "name_en": "Hamburger",
+      "description_en": "with french fries, tomatoes, lettuce, onion, ketchup and mayonnaise",
+      "name_nl": "Hamburger",
+      "description_nl": "met friet, tomaat, sla, ui, ketchup en mayonaise"
     },
     {
       "name": "Venezia Burger",
       "description": "mit Pommes, Speck, Jalapeños, Tomaten, Salat, Zwiebel, Ketchup und Mayonnaise",
-      "name_en": "Venezia burger",
-      "description_en": "with french fries, bacon, jalapeños, tomatoes, lettuce, onion, ketchup and mayonnaise",
-      "name_nl": "Venezia-burger",
-      "description_nl": "met friet, spek, jalapeños, tomaat, sla, ui, ketchup en mayonaise",
-      "group": "",
-      "group_en": "",
       "price": "17,90",
-      "size": "",
-      "price2": "",
-      "size2": "",
       "allergens": [
         "L",
         "M"
@@ -101,7 +73,28 @@
       "recommended": true,
       "soldOut": false,
       "hidden": false,
-      "image": null
+      "name_en": "Venezia burger",
+      "description_en": "with french fries, bacon, jalapeños, tomatoes, lettuce, onion, ketchup and mayonnaise",
+      "name_nl": "Venezia-burger",
+      "description_nl": "met friet, spek, jalapeños, tomaat, sla, ui, ketchup en mayonaise"
+    },
+    {
+      "name": "test Bier",
+      "description": "dafdf",
+      "image": "/src/assets/images/dishes/burger/dishes/4/image.jpeg",
+      "price": "1,5",
+      "size": "0,3",
+      "price2": "5",
+      "size2": "0,5",
+      "allergens": [],
+      "tags": [],
+      "recommended": true,
+      "soldOut": false,
+      "hidden": false,
+      "name_en": "Test Bier",
+      "description_en": "dfdf",
+      "name_nl": "Test",
+      "description_nl": "dfvsdv"
     }
   ]
 }
