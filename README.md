@@ -1,7 +1,7 @@
 # Venezia – Webseite & digitale Speisekarte
 
 Statische, sehr schnelle Webseite (gehostet auf **GitHub Pages**) mit Speisekarte (DE/EN/NL), Suche, Filtern, Allergenen und
-Tischreservierung per WhatsApp. Gepflegt wird über eine Admin-Oberfläche **ohne Code** (auf Arabisch) mit Button **„نشر على الإنترنت“** zum sofortigen Veröffentlichen.
+Tischreservierung per WhatsApp. Gepflegt wird über eine Admin-Oberfläche **ohne Code** (Bedienoberfläche auf Arabisch) mit Button **„Veröffentlichen“** (🚀) zum sofortigen Online-Stellen.
 
 ---
 
@@ -10,42 +10,42 @@ Tischreservierung per WhatsApp. Gepflegt wird über eine Admin-Oberfläche **ohn
 > Einmalig: `npm install`. Danach immer: **`npm run admin`** → Browser öffnet `localhost:4321/keystatic`.
 
 ### Neues Gericht
-1. `npm run admin` → **الأقسام والأصناف** (Kategorien & Gerichte) → Kategorie anklicken.
+1. `npm run admin` → **Kategorien & Gerichte** → Kategorie anklicken.
 2. Unten bei „Gerichte / Getränke" auf **Add**.
 3. Name, Beschreibung, **Foto**, Preis (z. B. `13,50`), Menge, Allergene ankreuzen.
-4. Mit ⠿ an die gewünschte Stelle ziehen → **Done** → **يحفظ** (Speichern).
-5. Kontrolle unter `localhost:4321`, dann Button **🚀 نشر على الإنترنت** (siehe unten).
+4. Mit ⠿ an die gewünschte Stelle ziehen → **Done** → **Speichern**.
+5. Kontrolle unter `localhost:4321`, dann Button **🚀 Veröffentlichen** (siehe unten).
 
 ### Neue Kategorie
-1. **الأقسام والأصناف** → **Add** (oben).
-2. Name (DE/EN/NL) und **الترتيب** (Reihenfolge) eintragen (10, 20, 30 … – kleinere Zahl = weiter oben).
-3. Art wählen: مأكولات (Speisen) oder مشروبات (Getränke). Optional Kategoriebild = Ersatzfoto für Einträge ohne eigenes Foto.
-4. Gerichte hinzufügen wie oben → **يحفظ** → **نشر**.
-5. Ausblenden statt löschen: Häkchen **إخفاء القسم**.
+1. **Kategorien & Gerichte** → **Add** (oben).
+2. Name (DE/EN/NL) und **Reihenfolge** eintragen (10, 20, 30 … – kleinere Zahl = weiter oben).
+3. Art wählen: Speisen oder Getränke. Optional Kategoriebild = Ersatzfoto für Einträge ohne eigenes Foto.
+4. Gerichte hinzufügen wie oben → **Speichern** → **Veröffentlichen**.
+5. Ausblenden statt löschen: Häkchen **Kategorie ausblenden**.
 
 ### Bild austauschen
-1. Gericht öffnen → **صورة الصنف** → **Choose file** → beliebiges Handy-Foto wählen (erscheint neben dem Gericht, halbe Kartenbreite).
-2. **Done** → **يحفظ** → **نشر**. Größe egal: wird automatisch verkleinert (AVIF/WebP). Ohne Foto: Kategoriebild bzw. Platzhalter.
+1. Gericht öffnen → **Foto des Gerichts** → **Choose file** → beliebiges Handy-Foto wählen (erscheint neben dem Gericht, halbe Kartenbreite).
+2. **Done** → **Speichern** → **Veröffentlichen**. Größe egal: wird automatisch verkleinert (AVIF/WebP). Ohne Foto: Kategoriebild bzw. Platzhalter.
 3. Ohne Admin: Datei mit Gerichtsnamen in `src/assets/images/dishes/` legen, z. B. `prosciutto.jpg`, `penne-al-tonno.jpg`.
-4. Kategoriebild, Logo, Startbild, Galerie: gleiches Prinzip unter **بيانات المطعم** bzw. Kategorie.
-5. Ausverkauft / Empfehlung: Häkchen ⛔ / ⭐ beim Gericht setzen → **يحفظ** → **نشر**.
+4. Kategoriebild, Logo, Startbild, Galerie: gleiches Prinzip unter **Restaurant-Daten** bzw. Kategorie.
+5. Ausverkauft / Empfehlung: Häkchen ⛔ / ⭐ beim Gericht setzen → **Speichern** → **Veröffentlichen**.
 
 ### Preis ändern
-1. **الأقسام والأصناف** → Kategorie → Gericht anklicken.
-2. Feld **السعر باليورو** ändern (Komma oder Punkt, z. B. `14,90`). Zweite Größe: „2. Preis".
-3. **Done** → **يحفظ** → **نشر**.
+1. **Kategorien & Gerichte** → Kategorie → Gericht anklicken.
+2. Feld **Preis in Euro** ändern (Komma oder Punkt, z. B. `14,90`). Zweite Größe: „2. Preis".
+3. **Done** → **Speichern** → **Veröffentlichen**.
 4. Alternativ direkt in `src/content/menu/<kategorie>.json` den Wert bei `"price"` ändern.
 5. `npm run check` meldet Tippfehler (falscher Preis, unbekanntes Allergen, fehlendes Bild).
 
 ### Seite veröffentlichen
-1. Im Admin auf **يحفظ** (Speichern) klicken.
-2. Unten links im Kasten **🚀 نشر على الإنترنت** klicken (macht automatisch `git commit` + `git push`, nur Inhalte und Bilder).
-3. Der Kasten zeigt „⏳ جارٍ البناء …“ und nach 1–3 Minuten „✅ تم!“ – dann ist alles online.
+1. Im Admin auf **Speichern** klicken (blauer Button oben).
+2. Unten links im Kasten **🚀 Veröffentlichen** klicken (macht automatisch `git commit` + `git push`, nur Inhalte und Bilder).
+3. Der Kasten zeigt ⏳ (Seite wird gebaut) und nach 1–3 Minuten ✅ – dann ist alles online.
 4. Live unter **https://jalal-sarokhan.github.io/beit-alshami/** (ohne Admin: `git add -A`, `git commit`, `git push`).
 5. Bei ❌ zeigt GitHub → **Actions** eine deutsche Meldung der Inhaltsprüfung (z. B. falscher Preis).
 
 **Restaurantdaten** (Adresse, Telefon, **WhatsApp-Nummer**, Öffnungszeiten, Farben, Impressum):
-Admin → **بيانات المطعم** (Restaurant-Daten), oder direkt `src/content/site.json`. Die WhatsApp-Nummer steht
+Admin → **Restaurant-Daten**, oder direkt `src/content/site.json`. Die WhatsApp-Nummer steht
 **nur dort** (`"whatsapp": "436641234567"`: Ländervorwahl, ohne `+`, ohne Leerzeichen).
 
 ---
@@ -113,7 +113,7 @@ src/i18n/ui.ts                 ← Texte der Oberfläche in DE/EN/NL
 src/pages/                     ← /, /en/, /nl/, /impressum/, /datenschutz/, /qr/
 scripts/validate-content.mjs   ← Inhaltsprüfung vor jedem Build
 keystatic.config.ts            ← Felder der Admin-Oberfläche (Arabisch)
-src/admin/PublishButton.tsx    ← Button „نشر على الإنترنت“ im Admin
+src/admin/PublishButton.tsx    ← Button „Veröffentlichen“ im Admin
 scripts/publish-plugin.mjs     ← lokaler Endpunkt dafür (git commit + push, Build-Status)
 ```
 
