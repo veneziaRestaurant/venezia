@@ -95,7 +95,8 @@
       "alt": "Frisch gezapftes Bier"
     },
     {
-      "image": "/src/assets/images/gallery/gallery/8/image.jpeg"
+      "image": "/src/assets/images/gallery/gallery/8/image.jpeg",
+      "alt": "Bier"
     }
   ],
   "colorBrand": "#2b1a12",
