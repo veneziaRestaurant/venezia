@@ -13,8 +13,8 @@ const site = JSON.parse(readFileSync(new URL('./src/content/site.json', import.m
 // Die veröffentlichte Seite bleibt dadurch rein statisch – schnell, sicher, kostenlos hostbar.
 const isDev = process.argv.includes('dev');
 
-// GitHub Pages: "url" in site.json, z. B. https://jalal-sarokhan.github.io/beit-alshami/
-// → site = https://jalal-sarokhan.github.io, base = /beit-alshami
+// GitHub Pages: "url" in site.json, z. B. https://veneziarestaurant.github.io/venezia/
+// → site = https://veneziarestaurant.github.io, base = /venezia
 // Bei eigener Domain (https://www.venezia-pizzeria.at/) wird base automatisch "/".
 const siteUrl = new URL(site.url);
 const basePath = siteUrl.pathname.replace(/\/+$/, '') || '/';
