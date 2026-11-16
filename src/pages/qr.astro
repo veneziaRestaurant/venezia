@@ -33,7 +33,7 @@ const logo = resolveImage(site.logo);
     <div class="qr-sheet">
       {logo && <Image src={logo} alt={site.name} width={260} style="margin:auto" />}
       <h1>Speisekarte</h1>
-      <p>Menu · قائمة الطعام</p>
+      <p>Menu · Menukaart</p>
       <div class="qr-code" set:html={qrSvg} role="img" aria-label={`QR-Code zu ${target}`}></div>
       <p style="font-size:.85rem;color:#6b5848">{target.replace(/^https?:\/\//, '').replace(/\/$/, '')}</p>
       <div class="qr-small">
