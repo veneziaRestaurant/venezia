@@ -1,0 +1,85 @@
+---
+import { Picture } from 'astro:assets';
+import Icon from './Icon.astro';
+import { type Dish, loc, formatPrice, dishImage, slugify } from '../lib/content';
+import { ALLERGENS } from '../lib/allergens';
+import { useT, type Lang } from '../i18n/ui';
+
+interface Props { dish: Dish; lang: Lang; categorySlug: string; compact?: boolean; index: number }
+const { dish, lang, categorySlug, compact = false, index } = Astro.props;
+const t = useT(lang);
+
+const name = loc(dish, 'name', lang);
+const desc = loc(dish, 'description', lang);
+// In EN/AR zusätzlich den deutschen Originalnamen zeigen, wenn er abweicht (hilft beim Bestellen)
+const original = lang !== 'de' && dish.name !== name ? dish.name : '';
+const img = compact ? undefined : dishImage(dish, categorySlug);
+const allergens = dish.allergens ?? [];
+const tags = dish.tags ?? [];
+const id = `${categorySlug}-${slugify(dish.name)}-${index}`;
+
+// Suchtext in allen Sprachen, damit Gäste auch auf Englisch „mushroom" finden
+const searchText = [dish.name, dish.name_en, dish.name_ar, dish.description, dish.description_en, dish.description_ar, dish.group, dish.group_en]
+  .filter(Boolean).join(' ');
+const prices = [
+  { price: dish.price, size: dish.size },
+  ...(dish.price2 ? [{ price: dish.price2, size: dish.size2 }] : []),
+];
+const alNames = allergens.map((a) => `${a} = ${ALLERGENS[a]?.[lang] ?? a}`).join(', ');
+---
+<article
+  class:list={['dish', { 'has-img': img, 'is-rec': dish.recommended, 'is-sold': dish.soldOut }]}
+  data-dish
+  data-search={searchText}
+  data-allergens={allergens.join(' ')}
+  data-tags={tags.join(' ')}
+  data-rec={dish.recommended ? '1' : undefined}
+  data-group={loc(dish, 'group', lang) || undefined}
+>
+  <div class="dish-main">
+    <h4 class="dish-name">{name}</h4>
+    {original && <p class="dish-sub" lang="de">{original}</p>}
+    {desc && <p class="dish-desc">{desc}</p>}
+  </div>
+
+  <div class="dish-side">
+    {prices.length > 1 ? (
+      <div class="dish-prices">
+        {prices.map((p) => (
+          <p class="dish-price">{formatPrice(p.price, lang)}<small>{p.size}</small></p>
+        ))}
+      </div>
+    ) : (
+      <p class="dish-price">
+        {formatPrice(dish.price, lang)} <span class="sr-only">€</span>
+        {compact && dish.size && <small>{dish.size}</small>}
+      </p>
+    )}
+    {img && (
+      <div class="dish-img">
+        <Picture src={img} alt={name} formats={['avif', 'webp']} widths={[108, 216]} sizes="108px" loading="lazy" decoding="async" />
+      </div>
+    )}
+  </div>
+
+  {(dish.recommended || dish.soldOut || tags.length || allergens.length || (!compact && dish.size && prices.length === 1)) && (
+    <div class="dish-meta">
+      {dish.soldOut && <span class="badge badge-sold">{t('badge.soldOut')}</span>}
+      {dish.recommended && <span class="badge badge-rec"><Icon name="star" />{t('badge.recommended')}</span>}
+      {tags.includes('vegan') ? (
+        <span class="badge badge-veg"><Icon name="leaf" />{t('badge.vegan')}</span>
+      ) : tags.includes('vegetarian') && (
+        <span class="badge badge-veg"><Icon name="leaf" />{t('badge.vegetarian')}</span>
+      )}
+      {tags.includes('spicy') && <span class="badge badge-spicy"><Icon name="chili" />{t('badge.spicy')}</span>}
+      {!compact && dish.size && prices.length === 1 && <span class="badge badge-size">{dish.size}</span>}
+      {allergens.length > 0 && (
+        <button type="button" class="al-btn" aria-expanded="false" aria-controls={`al-${id}`}>
+          <span class="sr-only">{t('footer.allergens')}:</span>
+          {allergens.map((a) => <abbr title={ALLERGENS[a]?.[lang]}>{a}</abbr>)}
+        </button>
+      )}
+    </div>
+  )}
+  {allergens.length > 0 && <p class="al-full" id={`al-${id}`} hidden>{t('allergens.contains')}: {alNames}</p>}
+</article>

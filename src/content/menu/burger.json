@@ -1,0 +1,112 @@
+{
+  "name": "Burger",
+  "name_en": "Burgers",
+  "name_ar": "البرغر",
+  "order": 60,
+  "hidden": false,
+  "kind": "food",
+  "image": "/src/assets/images/categories/burger/image.jpg",
+  "note": "",
+  "note_en": "",
+  "note_ar": "",
+  "dishes": [
+    {
+      "name": "Crunchy Chicken Burger",
+      "description": "Hühnerfleisch mit Pommes, Tomaten, Salat, Zwiebel, Ketchup und Mayonnaise",
+      "name_en": "Crunchy chicken burger",
+      "description_en": "chicken with french fries, tomatoes, lettuce, onion, ketchup and mayonnaise",
+      "name_ar": "",
+      "description_ar": "",
+      "group": "",
+      "group_en": "",
+      "group_ar": "",
+      "price": "15,80",
+      "size": "",
+      "price2": "",
+      "size2": "",
+      "allergens": [
+        "L",
+        "M"
+      ],
+      "tags": [],
+      "recommended": false,
+      "soldOut": false,
+      "hidden": false,
+      "image": null
+    },
+    {
+      "name": "Cheeseburger",
+      "description": "mit Pommes, Tomaten, Salat, Zwiebel, Ketchup und Mayonnaise",
+      "name_en": "Cheeseburger",
+      "description_en": "with french fries, tomatoes, lettuce, onion, ketchup and mayonnaise",
+      "name_ar": "",
+      "description_ar": "",
+      "group": "",
+      "group_en": "",
+      "group_ar": "",
+      "price": "16,90",
+      "size": "",
+      "price2": "",
+      "size2": "",
+      "allergens": [
+        "L",
+        "M"
+      ],
+      "tags": [],
+      "recommended": false,
+      "soldOut": false,
+      "hidden": false,
+      "image": "/src/assets/images/dishes/burger/dishes/1/image.jpg"
+    },
+    {
+      "name": "Hamburger",
+      "description": "mit Pommes, Tomaten, Salat, Zwiebel, Ketchup und Mayonnaise",
+      "name_en": "Hamburger",
+      "description_en": "with french fries, tomatoes, lettuce, onion, ketchup and mayonnaise",
+      "name_ar": "",
+      "description_ar": "",
+      "group": "",
+      "group_en": "",
+      "group_ar": "",
+      "price": "15,20",
+      "size": "",
+      "price2": "",
+      "size2": "",
+      "allergens": [
+        "L",
+        "M"
+      ],
+      "tags": [],
+      "recommended": false,
+      "soldOut": false,
+      "hidden": false,
+      "image": null
+    },
+    {
+      "name": "Venezia Burger",
+      "description": "mit Pommes, Speck, Jalapeños, Tomaten, Salat, Zwiebel, Ketchup und Mayonnaise",
+      "name_en": "Venezia burger",
+      "description_en": "with french fries, bacon, jalapeños, tomatoes, lettuce, onion, ketchup and mayonnaise",
+      "name_ar": "",
+      "description_ar": "",
+      "group": "",
+      "group_en": "",
+      "group_ar": "",
+      "price": "17,90",
+      "size": "",
+      "price2": "",
+      "size2": "",
+      "allergens": [
+        "L",
+        "M"
+      ],
+      "tags": [
+        "spicy"
+      ],
+      "recommended": true,
+      "soldOut": false,
+      "hidden": false,
+      "image": null
+    }
+  ]
+}

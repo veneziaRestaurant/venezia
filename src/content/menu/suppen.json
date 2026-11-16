@@ -1,0 +1,121 @@
+{
+  "name": "Suppen",
+  "name_en": "Soups",
+  "name_ar": "الشوربات",
+  "order": 10,
+  "hidden": false,
+  "kind": "food",
+  "image": "/src/assets/images/categories/suppen/image.jpg",
+  "note": "",
+  "note_en": "",
+  "note_ar": "",
+  "dishes": [
+    {
+      "name": "Hausgemachte Rindsuppe",
+      "description": "mit Nudeln oder Frittaten",
+      "name_en": "Homemade beef soup",
+      "description_en": "with noodles or sliced pancakes",
+      "name_ar": "",
+      "description_ar": "",
+      "group": "",
+      "group_en": "",
+      "group_ar": "",
+      "price": "6,90",
+      "size": "",
+      "price2": "",
+      "size2": "",
+      "allergens": [
+        "A",
+        "F",
+        "G",
+        "L"
+      ],
+      "tags": [],
+      "recommended": false,
+      "soldOut": false,
+      "hidden": false,
+      "image": null
+    },
+    {
+      "name": "Knoblauchcremesuppe",
+      "description": "mit Croutons",
+      "name_en": "Garlic cream soup",
+      "description_en": "with croutons",
+      "name_ar": "",
+      "description_ar": "",
+      "group": "",
+      "group_en": "",
+      "group_ar": "",
+      "price": "6,90",
+      "size": "",
+      "price2": "",
+      "size2": "",
+      "allergens": [
+        "A",
+        "G"
+      ],
+      "tags": [
+        "vegetarian"
+      ],
+      "recommended": false,
+      "soldOut": false,
+      "hidden": false,
+      "image": null
+    },
+    {
+      "name": "Tomatencremesuppe",
+      "description": "mit Croutons",
+      "name_en": "Tomato cream soup",
+      "description_en": "with croutons",
+      "name_ar": "",
+      "description_ar": "",
+      "group": "",
+      "group_en": "",
+      "group_ar": "",
+      "price": "6,90",
+      "size": "",
+      "price2": "",
+      "size2": "",
+      "allergens": [
+        "A",
+        "F",
+        "G"
+      ],
+      "tags": [
+        "vegetarian"
+      ],
+      "recommended": false,
+      "soldOut": false,
+      "hidden": false,
+      "image": null
+    },
+    {
+      "name": "Kaspressknödelsuppe",
+      "description": "",
+      "name_en": "Cheese dumpling soup",
+      "description_en": "clear soup with pan-fried cheese dumplings",
+      "name_ar": "",
+      "description_ar": "",
+      "group": "",
+      "group_en": "",
+      "group_ar": "",
+      "price": "6,90",
+      "size": "",
+      "price2": "",
+      "size2": "",
+      "allergens": [
+        "A",
+        "B",
+        "F",
+        "G",
+        "L",
+        "M"
+      ],
+      "tags": [],
+      "recommended": false,
+      "soldOut": false,
+      "hidden": false,
+      "image": null
+    }
+  ]
+}

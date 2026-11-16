@@ -1,0 +1,107 @@
+{
+  "name": "Venezia",
+  "subtitle": "Pizzeria · Restaurant",
+  "tagline": "Steinofenpizza, Pasta & Grillklassiker – frisch für Sie zubereitet.",
+  "tagline_en": "Stone-oven pizza, pasta & grill classics – freshly prepared for you.",
+  "tagline_ar": "بيتزا فرن الحجر والمعكرونة وأطباق الشواء – تُحضَّر طازجة من أجلكم.",
+  "url": "https://jalal-sarokhan.github.io/beit-alshami/",
+  "street": "Musterstraße 1",
+  "zip": "9020",
+  "city": "Klagenfurt am Wörthersee",
+  "country": "AT",
+  "phone": "+43 463 000000",
+  "whatsapp": "436640000000",
+  "email": "info@venezia-pizzeria.at",
+  "googleMapsUrl": "",
+  "googleReviewUrl": "https://www.google.com/search?q=Pizzeria+Venezia",
+  "instagram": "",
+  "facebook": "",
+  "timezone": "Europe/Vienna",
+  "openingHours": [
+    {
+      "day": "tu",
+      "open": "11:00",
+      "close": "22:00"
+    },
+    {
+      "day": "we",
+      "open": "11:00",
+      "close": "22:00"
+    },
+    {
+      "day": "th",
+      "open": "11:00",
+      "close": "22:00"
+    },
+    {
+      "day": "fr",
+      "open": "11:00",
+      "close": "23:00"
+    },
+    {
+      "day": "sa",
+      "open": "11:00",
+      "close": "23:00"
+    },
+    {
+      "day": "su",
+      "open": "11:00",
+      "close": "21:00"
+    }
+  ],
+  "hoursNote": "Warme Küche bis 30 Minuten vor Schließung.",
+  "hoursNote_en": "Kitchen closes 30 minutes before closing time.",
+  "reservationTemplate": "Hallo {restaurant}, ich möchte gerne einen Tisch reservieren:\n\n👤 Name: {name}\n👥 Personen: {persons}\n📅 Datum: {date}\n🕖 Uhrzeit: {time}\n{note}\nVielen Dank!",
+  "reservationTemplate_en": "Hello {restaurant}, I would like to book a table:\n\n👤 Name: {name}\n👥 Guests: {persons}\n📅 Date: {date}\n🕖 Time: {time}\n{note}\nThank you!",
+  "reservationTemplate_ar": "مرحباً {restaurant}، أرغب في حجز طاولة:\n\n👤 الاسم: {name}\n👥 عدد الأشخاص: {persons}\n📅 التاريخ: {date}\n🕖 الوقت: {time}\n{note}\nشكراً جزيلاً!",
+  "about": "Im Venezia dreht sich alles um ehrliche, frisch zubereitete Küche: knusprige Pizza aus dem Steinofen, hausgemachte Suppen und Spinatspätzle, Pasta mit Meeresfrüchten und saftige Klassiker vom Grill.\n\nDazu ein gut gezapftes Bier, ein Glas Wein und Zeit für Familie und Freunde – wir freuen uns auf Ihren Besuch.",
+  "about_en": "At Venezia it is all about honest, freshly cooked food: crispy stone-oven pizza, homemade soups and spinach spaetzle, seafood pasta and juicy grill classics.\n\nAdd a well-poured beer, a glass of wine and time with family and friends – we look forward to your visit.",
+  "about_ar": "في فينيسيا نقدّم مطبخاً صادقاً يُحضَّر طازجاً: بيتزا مقرمشة من فرن الحجر، شوربات منزلية، معكرونة بثمار البحر وأطباق شواء شهية.\n\nومعها مشروب منعش ووقت جميل مع العائلة والأصدقاء – يسعدنا استقبالكم.",
+  "logo": "/src/assets/images/site/logo.png",
+  "heroImage": "/src/assets/images/site/hero-plate.png",
+  "aboutImage": "/src/assets/images/site/about.jpg",
+  "gallery": [
+    {
+      "image": "/src/assets/images/gallery/pizza-tomaten.jpg",
+      "alt": "Steinofenpizza mit Rucola und Kirschtomaten"
+    },
+    {
+      "image": "/src/assets/images/gallery/spaghetti-venezia.jpg",
+      "alt": "Spaghetti mit Garnelen und Rucola"
+    },
+    {
+      "image": "/src/assets/images/gallery/rumpsteak.jpg",
+      "alt": "Gegrilltes Steak mit Beilagen"
+    },
+    {
+      "image": "/src/assets/images/gallery/bar.jpg",
+      "alt": "Barkeeper mixt einen Drink"
+    },
+    {
+      "image": "/src/assets/images/gallery/kaffee.jpg",
+      "alt": "Frischer Kaffee mit Bohnen"
+    },
+    {
+      "image": "/src/assets/images/gallery/digestif.jpg",
+      "alt": "Digestif und Whisky am Abend"
+    },
+    {
+      "image": "/src/assets/images/gallery/wein.jpg",
+      "alt": "Rotwein wird eingeschenkt"
+    },
+    {
+      "image": "/src/assets/images/gallery/bier.jpg",
+      "alt": "Frisch gezapftes Bier"
+    }
+  ],
+  "colorBrand": "#2b1a12",
+  "colorAccent": "#c49a52",
+  "colorHighlight": "#a8432a",
+  "legalOwner": "[Vorname Nachname / Firmenname]",
+  "legalForm": "[Einzelunternehmen / GmbH]",
+  "legalUid": "[ATU00000000]",
+  "legalRegister": "",
+  "legalChamber": "Wirtschaftskammer Kärnten, Fachgruppe Gastronomie",
+  "legalAuthority": "[Bezirkshauptmannschaft / Magistrat …]",
+  "legalTrade": "Gastgewerbe (Betriebsart Restaurant)"
+}
