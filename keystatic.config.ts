@@ -194,7 +194,7 @@ export default config({
         legalForm: fields.text({ label: 'Impressum: Rechtsform', description: 'z. B. Einzelunternehmen, GmbH' }),
         legalUid: fields.text({ label: 'Impressum: UID-Nummer' }),
         legalRegister: fields.text({ label: 'Impressum: Firmenbuchnummer & -gericht (falls vorhanden)' }),
-        legalChamber: fields.text({ label: 'Impressum: Kammer', defaultValue: 'Wirtschaftskammer Kärnten, Fachgruppe Gastronomie' }),
+        legalChamber: fields.text({ label: 'Impressum: Kammer', defaultValue: 'Wirtschaftskammer Salzburg, Fachgruppe Gastronomie' }),
         legalAuthority: fields.text({ label: 'Impressum: Gewerbebehörde' }),
         legalTrade: fields.text({ label: 'Impressum: Gewerbe', defaultValue: 'Gastgewerbe (Betriebsart Restaurant)' }),
       },
