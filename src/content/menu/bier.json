@@ -94,27 +94,6 @@
       "hidden": false,
       "name_en": "Special Bier",
       "name_nl": "Speciaalbier"
-    },
-    {
-      "name": "test bier",
-      "description": "dsvsdv",
-      "image": "/src/assets/images/dishes/bier/dishes/7/image.jpg",
-      "price": "3",
-      "size": "0,3",
-      "price2": "5",
-      "size2": "1",
-      "allergens": [],
-      "tags": [
-        "spicy"
-      ],
-      "recommended": true,
-      "soldOut": false,
-      "hidden": false,
-      "name_en": "Test",
-      "description_en": "sdvsdv",
-      "name_nl": "Test",
-      "description_nl": "dsvsv",
-      "group": "Getänke"
     }
   ]
 }
