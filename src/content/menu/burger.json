@@ -77,24 +77,6 @@
       "description_en": "with french fries, bacon, jalapeños, tomatoes, lettuce, onion, ketchup and mayonnaise",
       "name_nl": "Venezia-burger",
       "description_nl": "met friet, spek, jalapeños, tomaat, sla, ui, ketchup en mayonaise"
-    },
-    {
-      "name": "test Bier",
-      "description": "dafdf",
-      "image": "/src/assets/images/dishes/burger/dishes/4/image.jpg",
-      "price": "1,5",
-      "size": "0,3",
-      "price2": "5",
-      "size2": "0,5",
-      "allergens": [],
-      "tags": [],
-      "recommended": true,
-      "soldOut": false,
-      "hidden": false,
-      "name_en": "Test Bier",
-      "description_en": "dfdf",
-      "name_nl": "Test",
-      "description_nl": "dfvsdv"
     }
   ]
 }
