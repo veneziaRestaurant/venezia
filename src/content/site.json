@@ -52,9 +52,6 @@
       "close": "01:00"
     }
   ],
-  "hoursNote": "",
-  "hoursNote_en": "",
-  "hoursNote_nl": "",
   "reservationTemplate": "Hallo {restaurant}, ich möchte gerne einen Tisch reservieren:\n\n👤 Name: {name}\n👥 Personen: {persons}\n📅 Datum: {date}\n🕖 Uhrzeit: {time}\n{note}\nVielen Dank!",
   "reservationTemplate_en": "Hello {restaurant}, I would like to book a table:\n\n👤 Name: {name}\n👥 Guests: {persons}\n📅 Date: {date}\n🕖 Time: {time}\n{note}\nThank you!",
   "reservationTemplate_nl": "Hallo {restaurant}, ik wil graag een tafel reserveren:\n\n👤 Naam: {name}\n👥 Personen: {persons}\n📅 Datum: {date}\n🕖 Tijd: {time}\n{note}\nHartelijk dank!",
@@ -96,6 +93,9 @@
     {
       "image": "/src/assets/images/gallery/gallery/7/image.jpg",
       "alt": "Frisch gezapftes Bier"
+    },
+    {
+      "image": "/src/assets/images/gallery/gallery/8/image.jpeg"
     }
   ],
   "colorBrand": "#2b1a12",
