@@ -89,9 +89,9 @@ const hasVegan = menu.some((c) => c.dishes.some((d) => d.tags?.includes('vegan')
           {segments(c.dishes).map((seg) => (
             <>
               {seg.title && <h4 class="group-title" data-group-title>{seg.title}</h4>}
-              <div class={compact ? 'drink-list' : 'dish-list'}>
+              <div class="dish-list">
                 {seg.items.map(({ dish, index }) => (
-                  <DishItem dish={dish} lang={lang} categorySlug={c.slug} compact={compact} index={index} />
+                  <DishItem dish={dish} lang={lang} categorySlug={c.slug} compact={compact} index={index} fallbackImage={img} />
                 ))}
               </div>
             </>

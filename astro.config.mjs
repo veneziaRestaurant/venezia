@@ -5,6 +5,7 @@ import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import keystatic from '@keystatic/astro';
 import tailwindcss from '@tailwindcss/vite';
+import publishPlugin from './scripts/publish-plugin.mjs';
 
 const site = JSON.parse(readFileSync(new URL('./src/content/site.json', import.meta.url), 'utf-8'));
 
@@ -28,7 +29,7 @@ export default defineConfig({
   integrations: [
     sitemap({
       filter: (page) => !page.includes('/qr'),
-      i18n: { defaultLocale: 'de', locales: { de: 'de-AT', en: 'en', ar: 'ar' } },
+      i18n: { defaultLocale: 'de', locales: { de: 'de-AT', en: 'en', nl: 'nl' } },
     }),
     ...(isDev ? [react(), keystatic()] : []),
   ],
@@ -37,6 +38,7 @@ export default defineConfig({
     layout: 'constrained',
   },
   vite: {
-    plugins: [tailwindcss()],
+    // publishPlugin: nur lokal – Button „نشر على الإنترنت“ in der Admin-Oberfläche (git commit + push)
+    plugins: [tailwindcss(), ...(isDev ? [publishPlugin()] : [])],
   },
 });

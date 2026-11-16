@@ -1,7 +1,7 @@
 # Venezia – Webseite & digitale Speisekarte
 
-Statische, sehr schnelle Webseite (gehostet auf **GitHub Pages**) mit Speisekarte (DE/EN/AR), Suche, Filtern, Allergenen und
-Tischreservierung per WhatsApp. Gepflegt wird über eine Admin-Oberfläche **ohne Code**.
+Statische, sehr schnelle Webseite (gehostet auf **GitHub Pages**) mit Speisekarte (DE/EN/NL), Suche, Filtern, Allergenen und
+Tischreservierung per WhatsApp. Gepflegt wird über eine Admin-Oberfläche **ohne Code** (auf Arabisch) mit Button **„نشر على الإنترنت“** zum sofortigen Veröffentlichen.
 
 ---
 
@@ -10,42 +10,42 @@ Tischreservierung per WhatsApp. Gepflegt wird über eine Admin-Oberfläche **ohn
 > Einmalig: `npm install`. Danach immer: **`npm run admin`** → Browser öffnet `localhost:4321/keystatic`.
 
 ### Neues Gericht
-1. `npm run admin` → **Kategorien & Gerichte** → Kategorie anklicken.
+1. `npm run admin` → **الأقسام والأصناف** (Kategorien & Gerichte) → Kategorie anklicken.
 2. Unten bei „Gerichte / Getränke" auf **Add**.
-3. Name, Beschreibung, Preis (z. B. `13,50`), Menge, Allergene ankreuzen.
-4. Mit ⠿ an die gewünschte Stelle ziehen → **Done** → **Save**.
-5. Kontrolle unter `localhost:4321`, dann veröffentlichen (siehe unten).
+3. Name, Beschreibung, **Foto**, Preis (z. B. `13,50`), Menge, Allergene ankreuzen.
+4. Mit ⠿ an die gewünschte Stelle ziehen → **Done** → **يحفظ** (Speichern).
+5. Kontrolle unter `localhost:4321`, dann Button **🚀 نشر على الإنترنت** (siehe unten).
 
 ### Neue Kategorie
-1. **Kategorien & Gerichte** → **Add** (oben rechts).
-2. Name (DE/EN/optional AR) und **Reihenfolge** eintragen (10, 20, 30 … – kleinere Zahl = weiter oben).
-3. Art wählen: Speisen oder Getränke (Getränke werden kompakt als Liste gezeigt).
-4. Gerichte hinzufügen wie oben → **Save**.
-5. Ausblenden statt löschen: Häkchen „Kategorie ausblenden".
+1. **الأقسام والأصناف** → **Add** (oben).
+2. Name (DE/EN/NL) und **الترتيب** (Reihenfolge) eintragen (10, 20, 30 … – kleinere Zahl = weiter oben).
+3. Art wählen: مأكولات (Speisen) oder مشروبات (Getränke). Optional Kategoriebild = Ersatzfoto für Einträge ohne eigenes Foto.
+4. Gerichte hinzufügen wie oben → **يحفظ** → **نشر**.
+5. Ausblenden statt löschen: Häkchen **إخفاء القسم**.
 
 ### Bild austauschen
-1. Gericht öffnen → **Foto** → **Choose file** → beliebiges Handy-Foto wählen.
-2. **Done** → **Save**. Größe ist egal: beim Veröffentlichen wird automatisch verkleinert (AVIF/WebP).
+1. Gericht öffnen → **صورة الصنف** → **Choose file** → beliebiges Handy-Foto wählen (erscheint neben dem Gericht, halbe Kartenbreite).
+2. **Done** → **يحفظ** → **نشر**. Größe egal: wird automatisch verkleinert (AVIF/WebP). Ohne Foto: Kategoriebild bzw. Platzhalter.
 3. Ohne Admin: Datei mit Gerichtsnamen in `src/assets/images/dishes/` legen, z. B. `prosciutto.jpg`, `penne-al-tonno.jpg`.
-4. Kategoriebild, Logo, Startbild, Galerie: gleiches Prinzip unter „Restaurant-Daten" bzw. Kategorie.
-5. Ausverkauft / Empfehlung: Häkchen beim Gericht setzen → **Save**.
+4. Kategoriebild, Logo, Startbild, Galerie: gleiches Prinzip unter **بيانات المطعم** bzw. Kategorie.
+5. Ausverkauft / Empfehlung: Häkchen ⛔ / ⭐ beim Gericht setzen → **يحفظ** → **نشر**.
 
 ### Preis ändern
-1. **Kategorien & Gerichte** → Kategorie → Gericht anklicken.
-2. Feld **Preis in Euro** ändern (Komma oder Punkt, z. B. `14,90`). Zweite Größe: „2. Preis".
-3. **Done** → **Save**.
+1. **الأقسام والأصناف** → Kategorie → Gericht anklicken.
+2. Feld **السعر باليورو** ändern (Komma oder Punkt, z. B. `14,90`). Zweite Größe: „2. Preis".
+3. **Done** → **يحفظ** → **نشر**.
 4. Alternativ direkt in `src/content/menu/<kategorie>.json` den Wert bei `"price"` ändern.
 5. `npm run check` meldet Tippfehler (falscher Preis, unbekanntes Allergen, fehlendes Bild).
 
 ### Seite veröffentlichen
-1. Änderungen speichern (Admin → **Save**).
-2. `git add -A && git commit -m "Speisekarte aktualisiert"`
-3. `git push` → GitHub baut und veröffentlicht automatisch (ca. 2 Minuten, Fortschritt im Tab **Actions**).
-4. Live unter **https://jalal-sarokhan.github.io/beit-alshami/**
-5. Bei Fehlern zeigt der Actions-Log eine deutsche Meldung der Inhaltsprüfung. Einrichtung: siehe „Hosting“ unten.
+1. Im Admin auf **يحفظ** (Speichern) klicken.
+2. Unten links im Kasten **🚀 نشر على الإنترنت** klicken (macht automatisch `git commit` + `git push`, nur Inhalte und Bilder).
+3. Der Kasten zeigt „⏳ جارٍ البناء …“ und nach 1–3 Minuten „✅ تم!“ – dann ist alles online.
+4. Live unter **https://jalal-sarokhan.github.io/beit-alshami/** (ohne Admin: `git add -A`, `git commit`, `git push`).
+5. Bei ❌ zeigt GitHub → **Actions** eine deutsche Meldung der Inhaltsprüfung (z. B. falscher Preis).
 
 **Restaurantdaten** (Adresse, Telefon, **WhatsApp-Nummer**, Öffnungszeiten, Farben, Impressum):
-Admin → **Restaurant-Daten**, oder direkt `src/content/site.json`. Die WhatsApp-Nummer steht
+Admin → **بيانات المطعم** (Restaurant-Daten), oder direkt `src/content/site.json`. Die WhatsApp-Nummer steht
 **nur dort** (`"whatsapp": "436641234567"`: Ländervorwahl, ohne `+`, ohne Leerzeichen).
 
 ---
@@ -62,8 +62,8 @@ Details und alle offenen Fragen stehen in **[docs/PDF-PRUEFUNG.md](docs/PDF-PRUE
 
 **Was diese Seite besser macht:** Fotos und Kategorie-Bilder, Volltextsuche (findet auch „mushroom"),
 Filter (vegetarisch, scharf, Empfehlungen, *ohne* bestimmte Allergene), Allergene direkt am Gericht
-antippbar, „Jetzt geöffnet"-Anzeige, Reservierungsformular mit Ruhetag-Erkennung, DE/EN/AR inkl.
-Rechts-nach-links, Hell/Dunkel-Modus, druckbarer QR-Code, Schema.org-Speisekarte für Google.
+antippbar, „Jetzt geöffnet"-Anzeige, Reservierungsformular mit Ruhetag-Erkennung, DE/EN/NL,
+Hell/Dunkel-Modus, druckbarer QR-Code, Schema.org-Speisekarte für Google.
 
 ## Entscheidung: Keystatic (Git-basiert) statt Decap oder Supabase
 
@@ -96,7 +96,7 @@ Animationen (Einblenden, rotierender Teller, Dialog) sind mit CSS und einem 3-KB
 ## Design
 
 - **Schrift:** *Cormorant Garamond* (elegante italienische Antiqua für Überschriften und Gerichtsnamen) +
-  *Inter* (sehr gut lesbar auf kleinen Displays, Preise mit gleich breiten Ziffern) + *Noto Kufi Arabic* für AR.
+  *Inter* (sehr gut lesbar auf kleinen Displays, Preise mit gleich breiten Ziffern).
 - **Farben** aus dem Logo abgeleitet: Espresso `#2b1a12` (Wärme, Holzofen), Gold `#c49a52` (Logo-Akzent,
   Buttons), Terrakotta `#a8432a` (Tomate/Ziegel, für „scharf" und Hinweise), Creme `#f7f1e7` als Papiergrund.
   Änderbar in `site.json` (`colorBrand`, `colorAccent`, `colorHighlight`).
@@ -109,10 +109,12 @@ src/content/site.json          ← Restaurantdaten (EINZIGE Stelle für WhatsApp
 src/content/menu/*.json        ← je Kategorie eine Datei mit allen Gerichten
 src/assets/images/…            ← Bilder (werden automatisch optimiert)
 src/components/                ← Bausteine der Seite (Hero, Menu, DishItem, …)
-src/i18n/ui.ts                 ← Texte der Oberfläche in DE/EN/AR
-src/pages/                     ← /, /en/, /ar/, /impressum/, /datenschutz/, /qr/
+src/i18n/ui.ts                 ← Texte der Oberfläche in DE/EN/NL
+src/pages/                     ← /, /en/, /nl/, /impressum/, /datenschutz/, /qr/
 scripts/validate-content.mjs   ← Inhaltsprüfung vor jedem Build
-keystatic.config.ts            ← Felder der Admin-Oberfläche
+keystatic.config.ts            ← Felder der Admin-Oberfläche (Arabisch)
+src/admin/PublishButton.tsx    ← Button „نشر على الإنترنت“ im Admin
+scripts/publish-plugin.mjs     ← lokaler Endpunkt dafür (git commit + push, Build-Status)
 ```
 
 ## Befehle
@@ -166,7 +168,7 @@ zeigt sie wie auf GitHub unter `localhost:4321/beit-alshami/`.
 
 ## Qualitätsprüfung (Stand der Auslieferung)
 
-- Lighthouse mobil (simuliertes 4G): **DE 93 · EN 92 · AR 91** Performance (auch unter `/beit-alshami/` gemessen: 93), jeweils **100** Barrierefreiheit, Best Practices, SEO.
+- Lighthouse mobil (simuliertes 4G): **DE 93 · EN 92 · (AR, jetzt NL) 91** Performance (auch unter `/beit-alshami/` gemessen: 93), jeweils **100** Barrierefreiheit, Best Practices, SEO.
 - WhatsApp-Link getestet: `https://wa.me/<nummer>?text=…` mit Name, Personen, Datum (mit Wochentag), Uhrzeit, Anmerkung;
   Sonderzeichen korrekt kodiert; Ruhetage sperren das Formular; Uhrzeiten richten sich nach den Öffnungszeiten.
 - Pflege-Test im Admin: Preis geändert, Foto hochgeladen, gespeichert → sofort auf der Seite sichtbar.

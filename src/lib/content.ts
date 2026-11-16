@@ -10,11 +10,11 @@ export interface Dish {
   description?: string;
   name_en?: string;
   description_en?: string;
-  name_ar?: string;
-  description_ar?: string;
+  name_nl?: string;
+  description_nl?: string;
   group?: string;
   group_en?: string;
-  group_ar?: string;
+  group_nl?: string;
   price: string;
   size?: string;
   price2?: string;
@@ -31,14 +31,14 @@ export interface Category {
   slug: string;
   name: string;
   name_en?: string;
-  name_ar?: string;
+  name_nl?: string;
   order?: number;
   hidden?: boolean;
   kind?: 'food' | 'drinks';
   image?: string | null;
   note?: string;
   note_en?: string;
-  note_ar?: string;
+  note_nl?: string;
   dishes: Dish[];
 }
 
@@ -89,10 +89,10 @@ export function getMenu(): Category[] {
 
 /* ------------------------------------------------------------- Helfer */
 
-/** Liefert das Feld in der gewünschten Sprache; Fallback Arabisch → Englisch → Deutsch. */
+/** Liefert das Feld in der gewünschten Sprache; Fallback Niederländisch → Englisch → Deutsch. */
 export function loc<T extends object>(obj: T, field: string, lang: Lang): string {
   const o = obj as Record<string, unknown>;
-  const chain = lang === 'de' ? [field] : lang === 'en' ? [`${field}_en`, field] : [`${field}_ar`, `${field}_en`, field];
+  const chain = lang === 'de' ? [field] : lang === 'en' ? [`${field}_en`, field] : [`${field}_nl`, `${field}_en`, field];
   for (const k of chain) {
     const v = o[k];
     if (typeof v === 'string' && v.trim()) return v.trim();
@@ -120,7 +120,7 @@ export function parsePrice(p?: string): number | undefined {
 export function formatPrice(p: string | undefined, lang: Lang): string {
   const n = parsePrice(p);
   if (n === undefined) return p ?? '';
-  return new Intl.NumberFormat(lang === 'ar' ? 'de-AT' : lang === 'en' ? 'en-GB' : 'de-AT', {
+  return new Intl.NumberFormat(lang === 'nl' ? 'nl-NL' : lang === 'en' ? 'en-GB' : 'de-AT', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   }).format(n);
