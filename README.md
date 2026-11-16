@@ -7,7 +7,18 @@ Tischreservierung per WhatsApp. Gepflegt wird über eine Admin-Oberfläche **ohn
 
 ## Pflege in 5 Zeilen
 
-> Einmalig: `npm install`. Danach immer: **`npm run admin`** → Browser öffnet `localhost:4321/keystatic`.
+> **Admin öffnen: Desktop-Symbol „Venezia Admin“ doppelklicken.** Der Browser öffnet sich von selbst.
+> Das kleine schwarze Fenster offen lassen, solange gearbeitet wird; zum Beenden einfach schließen.
+
+### Admin auf einem neuen PC einrichten (einmalig)
+1. Datei herunterladen: https://github.com/Jalal-Sarokhan/beit-alshami/raw/main/Venezia-Admin-Einrichten.cmd
+2. Doppelklicken. Falls Windows warnt („Der Computer wurde durch Windows geschützt“): **Weitere Informationen → Trotzdem ausführen**.
+3. Git und Node.js werden automatisch installiert (Rückfragen mit **Ja** bestätigen), das Projekt landet in `C:\Users\<Name>\Venezia-Admin`.
+4. Danach liegt das Symbol **„Venezia Admin“** auf dem Desktop. Beim ersten Veröffentlichen fragt GitHub einmal nach der Anmeldung.
+5. Mac: Projekt-Ordner öffnen und `Venezia-Admin.command` doppelklicken (Node.js von nodejs.org vorher installieren).
+
+Der Starter holt bei jedem Start automatisch die neueste Speisekarte (mehrere PCs können abwechselnd pflegen)
+und richtet fehlende Programme selbst ein. Für Entwickler geht weiterhin `npm run admin`.
 
 ### Neues Gericht
 1. `npm run admin` → **Kategorien & Gerichte** → Kategorie anklicken.
@@ -112,6 +123,8 @@ src/components/                ← Bausteine der Seite (Hero, Menu, DishItem, �
 src/i18n/ui.ts                 ← Texte der Oberfläche in DE/EN/NL
 src/pages/                     ← /, /en/, /nl/, /impressum/, /datenschutz/, /qr/
 scripts/validate-content.mjs   ← Inhaltsprüfung vor jedem Build
+Venezia-Admin.cmd              ← Doppelklick-Starter für den Admin (Windows; .command = Mac)
+Venezia-Admin-Einrichten.cmd   ← Einrichtung auf einem neuen PC (Git/Node installieren, Projekt laden)
 keystatic.config.ts            ← Felder der Admin-Oberfläche (Arabisch)
 src/admin/PublishButton.tsx    ← Button „Veröffentlichen“ im Admin
 scripts/publish-plugin.mjs     ← lokaler Endpunkt dafür (git commit + push, Build-Status)
