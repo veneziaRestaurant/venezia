@@ -19,37 +19,37 @@
     {
       "day": "mo",
       "open": "11:00",
-      "close": "01:00"
+      "close": "00:00"
     },
     {
       "day": "tu",
       "open": "11:00",
-      "close": "01:00"
+      "close": "00:00"
     },
     {
       "day": "we",
       "open": "11:00",
-      "close": "01:00"
+      "close": "00:00"
     },
     {
       "day": "th",
       "open": "11:00",
-      "close": "01:00"
+      "close": "00:00"
     },
     {
       "day": "fr",
       "open": "11:00",
-      "close": "01:00"
+      "close": "00:00"
     },
     {
       "day": "sa",
       "open": "11:00",
-      "close": "01:00"
+      "close": "00:00"
     },
     {
       "day": "su",
       "open": "11:00",
-      "close": "01:00"
+      "close": "00:00"
     }
   ],
   "reservationTemplate": "Hallo {restaurant}, ich möchte gerne einen Tisch reservieren:\n\n👤 Name: {name}\n👥 Personen: {persons}\n📅 Datum: {date}\n🕖 Uhrzeit: {time}\n{note}\nVielen Dank!",
@@ -102,10 +102,7 @@
   "colorBrand": "#2b1a12",
   "colorAccent": "#c49a52",
   "colorHighlight": "#a8432a",
-  "legalOwner": "[Vorname Nachname / Firmenname]",
-  "legalForm": "[Einzelunternehmen / GmbH]",
-  "legalUid": "[ATU00000000]",
+  "legalOwner": "Delsher Alkhalaf",
   "legalChamber": "Wirtschaftskammer Salzburg, Fachgruppe Gastronomie",
-  "legalAuthority": "[Bezirkshauptmannschaft / Magistrat …]",
-  "legalTrade": "Gastgewerbe (Betriebsart Restaurant)"
+  "legalTrade": "Gastgewerbe "
 }
