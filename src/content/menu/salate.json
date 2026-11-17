@@ -5,7 +5,7 @@
   "order": 50,
   "hidden": false,
   "kind": "food",
-  "image": null,
+  "image": "/src/assets/images/categories/salate/image.jpg",
   "note": "",
   "note_en": "",
   "note_nl": "",

@@ -283,6 +283,99 @@ document.addEventListener('click', (e) => {
   if (panel) panel.hidden = !open;
 });
 
+/* ------------------- Handy/Tablet: Karte antippen = groß, nochmal = klein */
+const mqSmall = window.matchMedia('(max-width: 899px)');
+// Nach dem Öffnen: sobald der Gast weiterscrollt, wird die Karte wieder klein
+let openScrollY: number | null = null;
+function closeDishes(except?: HTMLElement) {
+  $$('[data-dish].is-open').forEach((d) => {
+    if (d === except) return;
+    d.classList.remove('is-open');
+    d.setAttribute('aria-expanded', 'false');
+    d.querySelectorAll('source, img').forEach((el) => el.setAttribute('sizes', DISH_SIZES));
+  });
+}
+window.addEventListener('scroll', () => {
+  if (openScrollY !== null && Math.abs(window.scrollY - openScrollY) > 60) { openScrollY = null; closeDishes(); }
+}, { passive: true });
+function toggleDish(dish: HTMLElement) {
+  if (!mqSmall.matches) return;
+  const open = !dish.classList.contains('is-open');
+  closeDishes(dish);
+  openScrollY = null;
+  if (open) setTimeout(() => { if (dish.classList.contains('is-open')) openScrollY = window.scrollY; }, 700);
+  dish.classList.toggle('is-open', open);
+  dish.setAttribute('aria-expanded', String(open));
+  // größeres Bild laden, solange die Karte groß ist
+  dish.querySelectorAll('source, img').forEach((el) => el.setAttribute('sizes', open ? '50vw' : DISH_SIZES));
+  if (open) requestAnimationFrame(() => {
+    const r = dish.getBoundingClientRect();
+    if (r.top < 70 || r.bottom > window.innerHeight) dish.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+}
+const DISH_SIZES = '(min-width: 1180px) 280px, (min-width: 900px) 24vw, 46vw';
+$$('[data-dish]').forEach((d) => { d.tabIndex = 0; d.setAttribute('aria-expanded', 'false'); });
+/* --------------- Desktop: Klick auf ein Gericht zeigt das Foto groß in der Mitte */
+let lightbox: HTMLElement | null = null;
+function closeLightbox() {
+  if (!lightbox || lightbox.hidden) return;
+  lightbox.hidden = true;
+  lightbox.querySelector('figure')!.innerHTML = '';
+}
+function openLightbox(dish: HTMLElement) {
+  const pic = dish.querySelector('.dish-img:not(.is-fallback) picture');
+  if (!pic) return;
+  if (!lightbox) {
+    lightbox = document.createElement('div');
+    lightbox.className = 'dish-zoom';
+    lightbox.hidden = true;
+    lightbox.setAttribute('role', 'dialog');
+    lightbox.setAttribute('aria-modal', 'true');
+    lightbox.innerHTML = '<figure></figure>';
+    lightbox.addEventListener('click', closeLightbox);
+    document.body.append(lightbox);
+  }
+  const clone = pic.cloneNode(true) as HTMLElement;
+  clone.querySelectorAll('source, img').forEach((el) => {
+    el.setAttribute('sizes', '90vw');
+    el.removeAttribute('loading');
+  });
+  const name = dish.querySelector('.dish-name')?.textContent?.trim() ?? '';
+  const price = dish.querySelector('.dish-price')?.textContent?.replace(/\s+/g, ' ').trim() ?? '';
+  const cap = document.createElement('figcaption');
+  cap.textContent = price ? `${name} · ${price}` : name;
+  const fig = lightbox.querySelector('figure')!;
+  fig.replaceChildren(clone, cap);
+  lightbox.setAttribute('aria-label', name);
+  lightbox.hidden = false;
+}
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+window.addEventListener('wheel', closeLightbox, { passive: true });
+window.addEventListener('scroll', closeLightbox, { passive: true });
+
+document.addEventListener('click', (e) => {
+  const t = e.target as Element;
+  const dish = t.closest<HTMLElement>('[data-dish]');
+  if (dish && !mqSmall.matches) {
+    if (!t.closest('button, a, .al-full')) openLightbox(dish);
+    return;
+  }
+  // Allergen-Buchstaben in der kleinen Karte: Karte öffnen (zeigt dann die Allergene ausgeschrieben)
+  const smallAl = dish && !dish.classList.contains('is-open') && t.closest('.al-btn');
+  if (!smallAl && t.closest('button, a, .al-full')) return;
+  if (dish) toggleDish(dish);
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  const dish = e.target as HTMLElement;
+  if (!dish.matches?.('[data-dish]')) return;
+  e.preventDefault();
+  if (mqSmall.matches) toggleDish(dish); else openLightbox(dish);
+});
+mqSmall.addEventListener('change', () => {
+  if (!mqSmall.matches) closeDishes(); else closeLightbox();
+});
+
 /* ---------------------------------------- Feste Reservieren-Leiste (Handy) */
 (function bottomBar() {
   const bar = $('[data-bottom-bar]');
