@@ -5,7 +5,7 @@
   "order": 100,
   "hidden": false,
   "kind": "drinks",
-  "image": null,
+  "image": "/src/assets/images/categories/alkoholfreie-getraenke/image.jpg",
   "note": "",
   "note_en": "",
   "note_nl": "",
