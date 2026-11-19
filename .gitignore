@@ -7,3 +7,6 @@ dist/
 
 # Original-Speisekarte (nur lokale Quelle, nicht für den Build nötig)
 Venezia.pdf
+
+# Persönliche Aufgabenliste (nie pushen)
+todo.md

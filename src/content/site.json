@@ -52,6 +52,7 @@
       "close": "22:00"
     }
   ],
+  "closedDays": [],
   "reservationTemplate": "Hallo {restaurant}, ich möchte gerne einen Tisch reservieren:\n\n👤 Name: {name}\n👥 Personen: {persons}\n📅 Datum: {date}\n🕖 Uhrzeit: {time}\n{note}\nVielen Dank!",
   "reservationTemplate_en": "Hello {restaurant}, I would like to book a table:\n\n👤 Name: {name}\n👥 Guests: {persons}\n📅 Date: {date}\n🕖 Time: {time}\n{note}\nThank you!",
   "reservationTemplate_nl": "Hallo {restaurant}, ik wil graag een tafel reserveren:\n\n👤 Naam: {name}\n👥 Personen: {persons}\n📅 Datum: {date}\n🕖 Tijd: {time}\n{note}\nHartelijk dank!",
@@ -59,7 +60,7 @@
   "about_en": "At Venezia it is all about honest, freshly cooked food: crispy stone-oven pizza, homemade soups and spinach spaetzle, seafood pasta and juicy grill classics.\n\nAdd a well-poured beer, a glass of wine and time with family and friends – we look forward to your visit.",
   "about_nl": "Bij Venezia draait alles om eerlijke, vers bereide gerechten: knapperige pizza uit de steenoven, huisgemaakte soepen en spinaziespätzle, pasta met zeevruchten en sappige klassiekers van de grill.\n\nDaarbij een goed getapt biertje, een glas wijn en tijd voor familie en vrienden – we verheugen ons op uw bezoek.",
   "logo": "/src/assets/images/site/logo.png",
-  "heroImage": "/src/assets/images/site/heroImage.png",
+  "heroImage": "/src/assets/images/site/heroImage-rippen.png",
   "aboutImage": "/src/assets/images/site/aboutImage.jpg",
   "gallery": [
     {

@@ -499,3 +499,16 @@ img { max-width: 100%; height: auto; }
   .dish-img { display: none; }
 }
 } /* Ende @layer components */
+
+/* ------------------------------------------------- Ausnahmsweise geschlossen */
+.closure-banner {
+  display: flex; align-items: center; gap: 10px; margin: 18px 0 0; padding: 10px 14px; border-radius: 14px; max-width: 34rem;
+  background: color-mix(in oklab, var(--highlight) 78%, black); color: #fff; font-weight: 600; font-size: 0.95rem; line-height: 1.35;
+  box-shadow: 0 8px 24px -12px rgb(0 0 0 / 0.5);
+}
+.closure-banner[hidden] { display: none; }
+.closures { margin-top: 18px; padding-top: 14px; border-top: 1px dashed var(--line); }
+.closures h4 { font-weight: 700; font-size: 0.95rem; color: var(--highlight-ink, var(--highlight)); margin-bottom: 6px; }
+.closures ul { display: grid; gap: 6px; }
+.closures li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 12px; font-variant-numeric: tabular-nums; }
+.closures .reason { color: var(--muted); font-style: italic; }

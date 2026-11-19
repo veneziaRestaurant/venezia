@@ -147,6 +147,24 @@ export const SCHEMA_DAYS: Record<string, string> = {
   mo: 'Monday', tu: 'Tuesday', we: 'Wednesday', th: 'Thursday', fr: 'Friday', sa: 'Saturday', su: 'Sunday',
 };
 
+/** Ausnahmsweise geschlossene Tage (Feiertage, Urlaub) – gepflegt in der Admin-Oberfläche */
+export interface ClosedDay { from: string; to?: string | null; reason?: string; reason_en?: string; reason_nl?: string }
+
+export function closedDays(lang: Lang) {
+  return ((site as { closedDays?: ClosedDay[] }).closedDays ?? [])
+    .filter((c) => c?.from)
+    .map((c) => {
+      const to = c.to && c.to >= c.from ? c.to : c.from;
+      return { from: c.from, to, reason: loc(c, 'reason', lang) };
+    })
+    .sort((a, b) => a.from.localeCompare(b.from));
+}
+
+/** "2026-12-24" → "Do., 24.12." in der jeweiligen Sprache */
+export function formatClosedDate(iso: string, locale: string) {
+  return new Intl.DateTimeFormat(locale, { weekday: 'short', day: '2-digit', month: '2-digit', timeZone: 'UTC' }).format(new Date(`${iso}T12:00:00Z`));
+}
+
 export function hoursByDay() {
   return DAY_ORDER.map((day) => ({
     day,

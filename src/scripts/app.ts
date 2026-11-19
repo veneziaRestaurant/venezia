@@ -15,6 +15,11 @@ interface SiteConfig {
   closedText: string;
   openText: string;
   untilText: string;
+  closures?: { from: string; to: string; reason: string }[];
+  closedTodayText: string;
+  closedBannerText: string;
+  closedDayText: string;
+  closedSpecialText: string;
 }
 
 const $ = <T extends Element = HTMLElement>(sel: string, root: ParentNode = document) => root.querySelector<T>(sel);
@@ -66,6 +71,45 @@ const slotRange = (s: Slot) => {
   return [o, c] as const;
 };
 
+/* ----------------------------------------- Ausnahmsweise geschlossene Tage */
+/** Liefert die Schließung, die das Datum (YYYY-MM-DD) betrifft – oder undefined */
+const closureOn = (iso: string) => (cfg.closures ?? []).find((c) => iso >= c.from && iso <= c.to);
+/** Datum ± Tage, rein auf Kalenderbasis (keine Zeitzonen-Probleme) */
+const addDays = (iso: string, n: number) => {
+  const d = new Date(`${iso}T12:00:00Z`);
+  d.setUTCDate(d.getUTCDate() + n);
+  return d.toISOString().slice(0, 10);
+};
+const fmtDate = (iso: string) =>
+  new Intl.DateTimeFormat(cfg.locale, { weekday: 'short', day: '2-digit', month: '2-digit', timeZone: 'UTC' }).format(new Date(`${iso}T12:00:00Z`));
+
+(function closures() {
+  const today = nowInRestaurant().iso;
+  // Vergangene Einträge in der Öffnungszeiten-Liste ausblenden
+  const list = $('[data-closures]');
+  if (list) {
+    $$<HTMLElement>('li[data-to]', list).forEach((li) => { if (li.dataset.to! < today) li.remove(); });
+    if (!$('li', list)) list.remove();
+  }
+  // Heutige Zeile in der Öffnungszeiten-Tabelle als geschlossen anzeigen
+  if (closureOn(today)) {
+    $$(`tr[data-day="${nowInRestaurant().day}"] td`).forEach((td) => {
+      td.innerHTML = '';
+      const span = document.createElement('span');
+      span.className = 'closed';
+      span.textContent = cfg.closedTodayText;
+      td.append(span);
+    });
+  }
+  // Hinweisbalken: heute geschlossen oder Schließung in den nächsten 7 Tagen
+  const banner = $('[data-closure-banner]');
+  const next = (cfg.closures ?? []).find((c) => c.to >= today && c.from <= addDays(today, 7));
+  if (!banner || !next) return;
+  const range = next.from === next.to ? fmtDate(next.from) : `${fmtDate(next.from)} – ${fmtDate(next.to)}`;
+  $('[data-closure-text]', banner)!.textContent = `${cfg.closedBannerText}: ${range}${next.reason ? ` · ${next.reason}` : ''}`;
+  banner.hidden = false;
+})();
+
 /* --------------------------------------------------------- Geöffnet-Status */
 (function openStatus() {
   const pill = $('[data-open-status]');
@@ -74,13 +118,17 @@ const slotRange = (s: Slot) => {
   if (!pill || !cfg.hours) return;
   const prevDay = DAYS[(DAYS.indexOf(now.day) + 6) % 7];
   let openUntil: string | null = null;
+  const closedToday = closureOn(now.iso);
+  const closedYesterday = closureOn(addDays(now.iso, -1));
   for (const s of cfg.hours) {
     const [o, c] = slotRange(s);
-    if (s.day === now.day && now.minutes >= o && now.minutes < c) openUntil = s.close;
-    if (s.day === prevDay && c > 1440 && now.minutes < c - 1440) openUntil = s.close;
+    if (!closedToday && s.day === now.day && now.minutes >= o && now.minutes < c) openUntil = s.close;
+    if (!closedYesterday && s.day === prevDay && c > 1440 && now.minutes < c - 1440) openUntil = s.close;
   }
   pill.dataset.open = String(!!openUntil);
-  $('[data-open-text]', pill)!.textContent = openUntil ? `${cfg.openText} · ${cfg.untilText} ${openUntil}` : cfg.closedText;
+  $('[data-open-text]', pill)!.textContent = openUntil
+    ? `${cfg.openText} · ${cfg.untilText} ${openUntil}`
+    : closedToday ? cfg.closedTodayText : cfg.closedText;
   pill.style.visibility = 'visible';
 })();
 
@@ -102,7 +150,8 @@ const slotRange = (s: Slot) => {
     time.innerHTML = '';
     const d = new Date(`${date.value}T12:00:00`);
     const day = DAYS[d.getDay()];
-    const slots = cfg.hours.filter((s) => s.day === day);
+    const special = closureOn(date.value);
+    const slots = special ? [] : cfg.hours.filter((s) => s.day === day);
     const isToday = date.value === today.iso;
     const options: string[] = [];
     for (const s of slots) {
@@ -116,6 +165,7 @@ const slotRange = (s: Slot) => {
     for (const v of options) time.add(new Option(v, v, false, v === prev));
     if (!time.value && options.length) time.value = options.find((v) => v >= '18:30') ?? options[0];
     const closed = !date.value || options.length === 0;
+    warn.textContent = special ? `${cfg.closedSpecialText}${special.reason ? ` (${special.reason})` : ''}` : cfg.closedDayText;
     warn.hidden = !closed;
     time.disabled = closed;
     submit.disabled = closed;

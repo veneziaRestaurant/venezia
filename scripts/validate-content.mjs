@@ -33,6 +33,12 @@ if (site) {
   for (const h of site.openingHours ?? []) {
     if (!TIME.test(h.open) || !TIME.test(h.close)) errors.push(`site.json: Öffnungszeit "${h.day} ${h.open}–${h.close}" bitte im Format HH:MM.`);
   }
+  for (const c of site.closedDays ?? []) {
+    const ISO = /^\d{4}-\d{2}-\d{2}$/;
+    if (!ISO.test(c.from ?? '')) errors.push(`site.json: Geschlossener Tag "${c.from}" – Datum fehlt oder ist ungültig.`);
+    else if (c.to && !ISO.test(c.to)) errors.push(`site.json: Geschlossen bis "${c.to}" ist ungültig.`);
+    else if (c.to && c.to < c.from) errors.push(`site.json: Geschlossen ${c.from} → ${c.to}: "bis" liegt vor "von".`);
+  }
   for (const k of ['logo', 'heroImage', 'aboutImage']) if (!imageExists(site[k])) errors.push(`site.json: Bild "${site[k]}" (${k}) nicht gefunden.`);
   for (const g of site.gallery ?? []) if (!imageExists(g.image)) errors.push(`site.json: Galeriebild "${g.image}" nicht gefunden.`);
   for (const k of ['colorBrand', 'colorAccent', 'colorHighlight'])

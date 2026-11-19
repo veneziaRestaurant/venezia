@@ -48,6 +48,13 @@ und richtet fehlende Programme selbst ein. Für Entwickler geht weiterhin `npm r
 4. Alternativ direkt in `src/content/menu/<kategorie>.json` den Wert bei `"price"` ändern.
 5. `npm run check` meldet Tippfehler (falscher Preis, unbekanntes Allergen, fehlendes Bild).
 
+### Tag schließen (Feiertag, Urlaub)
+1. Admin → **Restaurant-Daten** → **⛔ Geschlossene Tage** → **Hinzufügen**.
+2. **Von** wählen, **Bis** nur bei mehreren Tagen; Grund optional (z. B. `Weihnachten`, EN `Christmas`).
+3. **Done** → **Speichern** → **Veröffentlichen**.
+4. Folge: „Heute geschlossen“, keine Reservierung an diesen Tagen, Hinweis oben 7 Tage vorher, Liste bei Öffnungszeiten.
+5. Vergangene Einträge verschwinden automatisch von der Seite; im Admin kann man sie löschen (🗑).
+
 ### Seite veröffentlichen
 1. Im Admin auf **Speichern** klicken (blauer Button oben).
 2. Unten links im Kasten **🚀 Veröffentlichen** klicken (macht automatisch `git commit` + `git push`, nur Inhalte und Bilder).
