@@ -165,9 +165,16 @@ export function formatClosedDate(iso: string, locale: string) {
   return new Intl.DateTimeFormat(locale, { weekday: 'short', day: '2-digit', month: '2-digit', timeZone: 'UTC' }).format(new Date(`${iso}T12:00:00Z`));
 }
 
+/** Öffnungszeiten ohne die wöchentlichen Ruhetage (Admin: „Ruhetage") */
+export function weeklyHours() {
+  const rest = new Set<string>((site as { restDays?: string[] }).restDays ?? []);
+  return site.openingHours.filter((h) => !rest.has(h.day));
+}
+
 export function hoursByDay() {
+  const hours = weeklyHours();
   return DAY_ORDER.map((day) => ({
     day,
-    slots: site.openingHours.filter((h) => h.day === day).map((h) => ({ open: h.open, close: h.close })),
+    slots: hours.filter((h) => h.day === day).map((h) => ({ open: h.open, close: h.close })),
   }));
 }

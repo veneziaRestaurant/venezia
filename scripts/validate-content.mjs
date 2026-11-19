@@ -33,6 +33,9 @@ if (site) {
   for (const h of site.openingHours ?? []) {
     if (!TIME.test(h.open) || !TIME.test(h.close)) errors.push(`site.json: Öffnungszeit "${h.day} ${h.open}–${h.close}" bitte im Format HH:MM.`);
   }
+  for (const d of site.restDays ?? [])
+    if (!['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su'].includes(d)) errors.push(`site.json: Ruhetag "${d}" ist ungültig (erlaubt: mo, tu, we, th, fr, sa, su).`);
+  if ((site.restDays ?? []).length >= 7) errors.push('site.json: Alle 7 Tage sind als Ruhetag markiert – dann wäre nie geöffnet.');
   for (const c of site.closedDays ?? []) {
     const ISO = /^\d{4}-\d{2}-\d{2}$/;
     if (!ISO.test(c.from ?? '')) errors.push(`site.json: Geschlossener Tag "${c.from}" – Datum fehlt oder ist ungültig.`);

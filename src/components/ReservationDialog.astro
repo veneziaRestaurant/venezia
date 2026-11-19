@@ -1,6 +1,6 @@
 ---
 import Icon from './Icon.astro';
-import { site, loc, closedDays } from '../lib/content';
+import { site, loc, closedDays, weeklyHours } from '../lib/content';
 import { useT, LANG_META, type Lang } from '../i18n/ui';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -13,7 +13,7 @@ const config = {
   template: loc(site, 'reservationTemplate', lang) || site.reservationTemplate,
   locale: LANG_META[lang].locale,
   timezone: site.timezone || 'Europe/Vienna',
-  hours: site.openingHours,
+  hours: weeklyHours(),
   noteLabel: t('form.noteLabel'),
   closedText: t('status.closed'),
   openText: t('status.open'),

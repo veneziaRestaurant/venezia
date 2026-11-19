@@ -48,6 +48,13 @@ und richtet fehlende Programme selbst ein. Für Entwickler geht weiterhin `npm r
 4. Alternativ direkt in `src/content/menu/<kategorie>.json` den Wert bei `"price"` ändern.
 5. `npm run check` meldet Tippfehler (falscher Preis, unbekanntes Allergen, fehlendes Bild).
 
+### Ruhetag (jede Woche geschlossen, z. B. jeden Mittwoch)
+1. Admin → **Restaurant-Daten** → **🚫 Ruhetage** → Tag ankreuzen (z. B. Mittwoch).
+2. **Speichern** → **Veröffentlichen**.
+3. Folge: Tabelle zeigt „Ruhetag“, keine Reservierung an diesem Wochentag, Status „Derzeit geschlossen“.
+4. Die Öffnungszeiten des Tages bleiben gespeichert und gelten wieder, sobald der Haken entfernt wird.
+5. Einzelne Tage (Feiertag, Urlaub) → nächster Abschnitt.
+
 ### Tag schließen (Feiertag, Urlaub)
 1. Admin → **Restaurant-Daten** → **⛔ Geschlossene Tage** → **Hinzufügen**.
 2. **Von** wählen, **Bis** nur bei mehreren Tagen; Grund optional (z. B. `Weihnachten`, EN `Christmas`).

@@ -52,6 +52,7 @@
       "close": "22:00"
     }
   ],
+  "restDays": [],
   "closedDays": [],
   "reservationTemplate": "Hallo {restaurant}, ich möchte gerne einen Tisch reservieren:\n\n👤 Name: {name}\n👥 Personen: {persons}\n📅 Datum: {date}\n🕖 Uhrzeit: {time}\n{note}\nVielen Dank!",
   "reservationTemplate_en": "Hello {restaurant}, I would like to book a table:\n\n👤 Name: {name}\n👥 Guests: {persons}\n📅 Date: {date}\n🕖 Time: {time}\n{note}\nThank you!",

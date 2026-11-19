@@ -172,6 +172,19 @@ export default config({
             itemLabel: (p) => `${p.fields.day.value}: ${p.fields.open.value}–${p.fields.close.value}`,
           }
         ),
+        restDays: fields.multiselect({
+          label: '🚫 أيام العطلة الأسبوعية (مغلق كل أسبوع)',
+          description: 'اختر اليوم الذي يُغلق فيه المطعم كل أسبوع (مثلاً كل أربعاء). يظهر „Ruhetag" ولا يمكن الحجز فيه. أوقات العمل المسجلة لهذا اليوم تبقى محفوظة وتعود عند إزالة العلامة.',
+          options: [
+            { label: 'الاثنين (Montag)', value: 'mo' },
+            { label: 'الثلاثاء (Dienstag)', value: 'tu' },
+            { label: 'الأربعاء (Mittwoch)', value: 'we' },
+            { label: 'الخميس (Donnerstag)', value: 'th' },
+            { label: 'الجمعة (Freitag)', value: 'fr' },
+            { label: 'السبت (Samstag)', value: 'sa' },
+            { label: 'الأحد (Sonntag)', value: 'su' },
+          ],
+        }),
         closedDays: fields.array(
           fields.object({
             from: fields.date({ label: 'مغلق من (التاريخ)', validation: { isRequired: true } }),
