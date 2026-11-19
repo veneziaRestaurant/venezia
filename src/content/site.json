@@ -11,7 +11,7 @@
   "country": "AT",
   "phone": "+43 676 5201720",
   "whatsapp": "43654720322",
-  "email": "info@venezia-pizzeria.at",
+  "email": "pizzaveneziakaprun@gmail.com",
   "googleMapsUrl": "https://maps.app.goo.gl/6T4BNf3aSZbVJnaN7",
   "googleReviewUrl": "https://www.google.com/search?q=Pizzeria+Venezia+Kaprun",
   "timezone": "Europe/Vienna",
@@ -19,37 +19,32 @@
     {
       "day": "mo",
       "open": "11:00",
-      "close": "00:00"
+      "close": "22:00"
     },
     {
       "day": "tu",
       "open": "11:00",
-      "close": "00:00"
-    },
-    {
-      "day": "we",
-      "open": "11:00",
-      "close": "00:00"
+      "close": "22:00v"
     },
     {
       "day": "th",
       "open": "11:00",
-      "close": "00:00"
+      "close": "22:00"
     },
     {
       "day": "fr",
       "open": "11:00",
-      "close": "00:00"
+      "close": "22:00"
     },
     {
       "day": "sa",
       "open": "11:00",
-      "close": "00:00"
+      "close": "22:00"
     },
     {
       "day": "su",
       "open": "11:00",
-      "close": "00:00"
+      "close": "22:00"
     }
   ],
   "reservationTemplate": "Hallo {restaurant}, ich möchte gerne einen Tisch reservieren:\n\n👤 Name: {name}\n👥 Personen: {persons}\n📅 Datum: {date}\n🕖 Uhrzeit: {time}\n{note}\nVielen Dank!",
