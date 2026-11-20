@@ -9,7 +9,7 @@
   "zip": "5710",
   "city": "Kaprun",
   "country": "AT",
-  "phone": "+43 676 5201720",
+  "phone": "+43 6547 20322",
   "whatsapp": "43654720322",
   "email": "pizzaveneziakaprun@gmail.com",
   "googleMapsUrl": "https://maps.app.goo.gl/6T4BNf3aSZbVJnaN7",
@@ -29,7 +29,7 @@
     {
       "day": "we",
       "open": "11:00",
-      "close": "12:00"
+      "close": "11:00"
     },
     {
       "day": "th",
@@ -52,20 +52,19 @@
       "close": "22:00"
     }
   ],
-  "restDays": [],
+  "restDays": [
+    "we"
+  ],
   "closedDays": [],
   "reservationTemplate": "Hallo {restaurant}, ich möchte gerne einen Tisch reservieren:\n\n👤 Name: {name}\n👥 Personen: {persons}\n📅 Datum: {date}\n🕖 Uhrzeit: {time}\n{note}\nVielen Dank!",
   "reservationTemplate_en": "Hello {restaurant}, I would like to book a table:\n\n👤 Name: {name}\n👥 Guests: {persons}\n📅 Date: {date}\n🕖 Time: {time}\n{note}\nThank you!",
   "reservationTemplate_nl": "Hallo {restaurant}, ik wil graag een tafel reserveren:\n\n👤 Naam: {name}\n👥 Personen: {persons}\n📅 Datum: {date}\n🕖 Tijd: {time}\n{note}\nHartelijk dank!",
   "orderEnabled": true,
-  "orderTemplate": "Hallo {restaurant}, ich möchte gerne bestellen:\n\n{items}\n\n💶 Summe: {total} (Bezahlung an der Kasse)\n{mode}\n👤 Name: {name}\n📅 Datum: {date}\n🕖 Uhrzeit: {time}\n{note}\nVielen Dank!",
-  "orderTemplate_en": "Hello {restaurant}, I would like to order:\n\n{items}\n\n💶 Total: {total} (payment at the counter)\n{mode}\n👤 Name: {name}\n📅 Date: {date}\n🕖 Time: {time}\n{note}\nThank you!",
-  "orderTemplate_nl": "Hallo {restaurant}, ik wil graag bestellen:\n\n{items}\n\n💶 Totaal: {total} (betalen aan de kassa)\n{mode}\n👤 Naam: {name}\n📅 Datum: {date}\n🕖 Tijd: {time}\n{note}\nHartelijk dank!",
   "about": "Im Venezia dreht sich alles um ehrliche, frisch zubereitete Küche: knusprige Pizza aus dem Steinofen, hausgemachte Suppen und Spinatspätzle, Pasta mit Meeresfrüchten und saftige Klassiker vom Grill.\n\nDazu ein gut gezapftes Bier, ein Glas Wein und Zeit für Familie und Freunde – wir freuen uns auf Ihren Besuch.",
   "about_en": "At Venezia it is all about honest, freshly cooked food: crispy stone-oven pizza, homemade soups and spinach spaetzle, seafood pasta and juicy grill classics.\n\nAdd a well-poured beer, a glass of wine and time with family and friends – we look forward to your visit.",
   "about_nl": "Bij Venezia draait alles om eerlijke, vers bereide gerechten: knapperige pizza uit de steenoven, huisgemaakte soepen en spinaziespätzle, pasta met zeevruchten en sappige klassiekers van de grill.\n\nDaarbij een goed getapt biertje, een glas wijn en tijd voor familie en vrienden – we verheugen ons op uw bezoek.",
   "logo": "/src/assets/images/site/logo.png",
-  "heroImage": "/src/assets/images/site/heroImage-rippen.png",
+  "heroImage": "/src/assets/images/site/heroImage.png",
   "aboutImage": "/src/assets/images/site/aboutImage.jpg",
   "gallery": [
     {
