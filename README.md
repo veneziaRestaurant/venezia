@@ -199,3 +199,10 @@ zeigt sie wie auf GitHub unter `localhost:4321/venezia/`.
 - WhatsApp-Link getestet: `https://wa.me/<nummer>?text=…` mit Name, Personen, Datum (mit Wochentag), Uhrzeit, Anmerkung;
   Sonderzeichen korrekt kodiert; Ruhetage sperren das Formular; Uhrzeiten richten sich nach den Öffnungszeiten.
 - Pflege-Test im Admin: Preis geändert, Foto hochgeladen, gespeichert → sofort auf der Seite sichtbar.
+
+## Bestellung mit Warenkorb (per WhatsApp)
+- Bei jedem Preis ein „+“ → Artikel landet im Warenkorb (Button unten rechts mit Anzahl und Summe).
+- Warenkorb: Menge ändern, **Abholen** oder **Vor Ort essen**, Name, Datum, Uhrzeit (nur innerhalb der Öffnungszeiten, nicht an Ruhetagen/geschlossenen Tagen), Anmerkung.
+- **Per WhatsApp bestellen** öffnet WhatsApp mit fertiger Bestellung an die Nummer aus `site.json`. Bezahlung nur an der Kasse.
+- Admin → Restaurant-Daten: **🛒 Bestellung aktivieren** (aus = keine „+“-Buttons, kein Warenkorb) und Nachrichtenvorlage DE/EN/NL.
+

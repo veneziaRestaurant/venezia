@@ -211,6 +211,18 @@ export default config({
         }),
         reservationTemplate_en: fields.text({ label: 'نص رسالة واتساب (إنجليزي)', multiline: true }),
         reservationTemplate_nl: fields.text({ label: 'نص رسالة واتساب (هولندي)', multiline: true }),
+        orderEnabled: fields.checkbox({
+          label: '🛒 تفعيل الطلب (سلة المشتريات عبر واتساب)',
+          description: 'إيقاف = تختفي أزرار „+" وسلة المشتريات من الموقع (مثلاً عند الازدحام). الدفع دائماً عند الصندوق.',
+          defaultValue: true,
+        }),
+        orderTemplate: fields.text({
+          label: 'نص رسالة واتساب للطلب (ألماني)',
+          multiline: true,
+          description: 'المتغيرات: {items} {total} {mode} {name} {date} {time} {note}',
+        }),
+        orderTemplate_en: fields.text({ label: 'نص رسالة الطلب (إنجليزي)', multiline: true }),
+        orderTemplate_nl: fields.text({ label: 'نص رسالة الطلب (هولندي)', multiline: true }),
         about: fields.text({ label: 'من نحن (ألماني)', multiline: true }),
         about_en: fields.text({ label: 'من نحن (إنجليزي)', multiline: true }),
         about_nl: fields.text({ label: 'من نحن (هولندي)', multiline: true }),

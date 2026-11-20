@@ -20,6 +20,7 @@ interface SiteConfig {
   closedBannerText: string;
   closedDayText: string;
   closedSpecialText: string;
+  tooLateText: string;
 }
 
 const $ = <T extends Element = HTMLElement>(sel: string, root: ParentNode = document) => root.querySelector<T>(sel);
@@ -132,6 +133,32 @@ const fmtDate = (iso: string) =>
   pill.style.visibility = 'visible';
 })();
 
+/* ------------------------------------- Mögliche Uhrzeiten für ein Datum */
+/**
+ * Liefert die wählbaren Uhrzeiten eines Tages – berücksichtigt Öffnungszeiten,
+ * Ruhetage und ausnahmsweise geschlossene Tage.
+ * step = Takt in Minuten, startGap/endGap = Abstand zu Öffnung/Schließung, lead = Vorlauf ab jetzt
+ */
+function timeSlots(dateIso: string, step: number, startGap: number, endGap: number, lead = 30) {
+  const now = nowInRestaurant();
+  const day = DAYS[new Date(`${dateIso}T12:00:00`).getDay()];
+  const special = closureOn(dateIso);
+  const slots = special ? [] : cfg.hours.filter((s) => s.day === day);
+  const options: string[] = [];
+  let past = 0; // Uhrzeiten, die heute schon vorbei sind
+  for (const s of slots) {
+    const [o, c] = slotRange(s);
+    for (let m = Math.ceil((o + startGap) / step) * step; m <= c - endGap; m += step) {
+      if (dateIso === now.iso && m < now.minutes + lead) { past++; continue; }
+      options.push(fmt(m));
+    }
+  }
+  return { options, special, tooLate: !options.length && past > 0 };
+}
+/** Hinweistext, wenn an einem Tag keine Uhrzeit möglich ist */
+const closedMessage = (special?: { reason: string }, tooLate = false) =>
+  special ? `${cfg.closedSpecialText}${special.reason ? ` (${special.reason})` : ''}` : tooLate ? cfg.tooLateText : cfg.closedDayText;
+
 /* ------------------------------------------------- Reservierung per WhatsApp */
 (function reservation() {
   const dialog = $<HTMLDialogElement>('#reserve-dialog');
@@ -148,24 +175,12 @@ const fmtDate = (iso: string) =>
   function fillTimes() {
     const prev = time.value;
     time.innerHTML = '';
-    const d = new Date(`${date.value}T12:00:00`);
-    const day = DAYS[d.getDay()];
-    const special = closureOn(date.value);
-    const slots = special ? [] : cfg.hours.filter((s) => s.day === day);
-    const isToday = date.value === today.iso;
-    const options: string[] = [];
-    for (const s of slots) {
-      const [o, c] = slotRange(s);
-      // Reservierungen im 30-Minuten-Takt bis 1 Stunde vor Schließung
-      for (let m = Math.ceil(o / 30) * 30; m <= c - 60; m += 30) {
-        if (isToday && m < today.minutes + 30) continue;
-        options.push(fmt(m));
-      }
-    }
+    // Reservierungen im 30-Minuten-Takt bis 1 Stunde vor Schließung
+    const { options, special, tooLate } = date.value ? timeSlots(date.value, 30, 0, 60) : { options: [] as string[], special: undefined, tooLate: false };
     for (const v of options) time.add(new Option(v, v, false, v === prev));
     if (!time.value && options.length) time.value = options.find((v) => v >= '18:30') ?? options[0];
     const closed = !date.value || options.length === 0;
-    warn.textContent = special ? `${cfg.closedSpecialText}${special.reason ? ` (${special.reason})` : ''}` : cfg.closedDayText;
+    warn.textContent = closedMessage(special, tooLate);
     warn.hidden = !closed;
     time.disabled = closed;
     submit.disabled = closed;
@@ -207,6 +222,224 @@ const fmtDate = (iso: string) =>
     if (!win) location.href = url;
     dialog.close();
   });
+})();
+
+/* ------------------------------------------- Warenkorb & Bestellung (WhatsApp) */
+(function cart() {
+  const dlg = $<HTMLDialogElement>('#order-dialog');
+  const fab = $<HTMLButtonElement>('[data-cart-open]');
+  const cfgEl = $('#order-config');
+  if (!dlg || !fab || !cfgEl || typeof dlg.showModal !== 'function') return;
+  const ocfg: Record<string, string> = JSON.parse(cfgEl.textContent || '{}');
+
+  type Item = { key: string; name: string; nameDe: string; size: string; price: number };
+  type Line = Item & { qty: number };
+  const STORE = 'venezia-cart-v1';
+
+  // Alle bestellbaren Artikel der Seite (ausverkaufte haben keinen „+“-Button)
+  const addBtns = $$<HTMLButtonElement>('[data-add]');
+  const catalog = new Map<string, Item>();
+  for (const b of addBtns) {
+    catalog.set(b.dataset.key!, {
+      key: b.dataset.key!,
+      name: b.dataset.name || '',
+      nameDe: b.dataset.nameDe || b.dataset.name || '',
+      size: b.dataset.size || '',
+      price: Number(b.dataset.price) || 0,
+    });
+  }
+
+  // Warenkorb aus dem Browser laden – Preise immer frisch von der Seite, entfernte Artikel fallen raus
+  let lines: Line[] = [];
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORE) || '[]');
+    if (Array.isArray(saved))
+      lines = saved
+        .filter((l) => l && catalog.has(l.key) && Number(l.qty) > 0)
+        .map((l) => ({ ...catalog.get(l.key)!, qty: Math.min(99, Math.floor(Number(l.qty))) }));
+  } catch {}
+  const save = () => {
+    try { localStorage.setItem(STORE, JSON.stringify(lines.map(({ key, qty }) => ({ key, qty })))); } catch {}
+  };
+
+  const money = new Intl.NumberFormat(cfg.locale, { style: 'currency', currency: 'EUR' });
+  const count = () => lines.reduce((n, l) => n + l.qty, 0);
+  const total = () => lines.reduce((n, l) => n + l.qty * l.price, 0);
+
+  const list = $('[data-cart-list]', dlg)!;
+  const empty = $('[data-cart-empty]', dlg)!;
+  const sum = $('[data-cart-sum]', dlg)!;
+  const sumValue = $('[data-cart-sum-value]', dlg)!;
+  const form = $<HTMLFormElement>('[data-order-form]', dlg)!;
+  const main = $('[data-order-main]', dlg)!;
+  const done = $('[data-order-done]', dlg)!;
+  const live = $('[data-cart-live]');
+  const countEl = $('[data-cart-count]', fab)!;
+  const totalEl = $('[data-cart-total]', fab)!;
+
+  function render() {
+    const n = count();
+    fab.hidden = n === 0;
+    countEl.textContent = String(n);
+    totalEl.textContent = money.format(total());
+    sumValue.textContent = money.format(total());
+    empty.hidden = n > 0;
+    sum.hidden = form.hidden = n === 0;
+    list.replaceChildren(
+      ...lines.map((l) => {
+        const li = document.createElement('li');
+        li.dataset.key = l.key;
+        const label = document.createElement('span');
+        label.className = 'cl-name';
+        label.textContent = l.name;
+        if (l.size) {
+          const small = document.createElement('small');
+          small.textContent = l.size;
+          label.append(small);
+        }
+        const qty = document.createElement('span');
+        qty.className = 'cl-qty';
+        const dec = document.createElement('button');
+        dec.type = 'button'; dec.dataset.dec = ''; dec.textContent = '−';
+        dec.setAttribute('aria-label', `${l.name}: ${ocfg.less}`);
+        const out = document.createElement('output');
+        out.textContent = String(l.qty);
+        const inc = document.createElement('button');
+        inc.type = 'button'; inc.dataset.inc = ''; inc.textContent = '+';
+        inc.setAttribute('aria-label', `${l.name}: ${ocfg.more}`);
+        qty.append(dec, out, inc);
+        const price = document.createElement('span');
+        price.className = 'cl-sum';
+        price.textContent = money.format(l.qty * l.price);
+        li.append(label, qty, price);
+        return li;
+      })
+    );
+    // Menge direkt am „+“-Button der Karte anzeigen
+    for (const b of addBtns) {
+      const l = lines.find((x) => x.key === b.dataset.key);
+      b.classList.toggle('in-cart', !!l);
+      if (l) b.dataset.qty = String(l.qty); else delete b.dataset.qty;
+    }
+  }
+
+  function change(key: string, delta: number) {
+    const item = catalog.get(key);
+    if (!item) return;
+    const line = lines.find((l) => l.key === key);
+    if (line) line.qty = Math.max(0, Math.min(99, line.qty + delta));
+    else if (delta > 0) lines.push({ ...item, qty: delta });
+    lines = lines.filter((l) => l.qty > 0);
+    save();
+    render();
+  }
+
+  for (const b of addBtns) {
+    b.addEventListener('click', (e) => {
+      e.stopPropagation(); // Karte nicht auf-/zuklappen, kein Foto-Zoom
+      change(b.dataset.key!, 1);
+      fab.classList.remove('bump');
+      void fab.offsetWidth; // Animation neu starten
+      fab.classList.add('bump');
+      b.classList.add('just-added');
+      setTimeout(() => b.classList.remove('just-added'), 600);
+      if (live) live.textContent = `${b.dataset.name}${b.dataset.size ? ` (${b.dataset.size})` : ''}: ${ocfg.added}`;
+    });
+  }
+  list.addEventListener('click', (e) => {
+    const btn = (e.target as Element).closest('button');
+    const key = btn?.closest('li')?.dataset.key;
+    if (!btn || !key) return;
+    change(key, btn.hasAttribute('data-inc') ? 1 : -1);
+  });
+
+  /* ---- Formular: Abholen / Vor Ort, Datum, Uhrzeit */
+  const date = form.elements.namedItem('date') as HTMLInputElement;
+  const time = form.elements.namedItem('time') as HTMLSelectElement;
+  const timeLabel = $('[data-time-label]', form)!;
+  const personsField = $('[data-persons-field]', form)!;
+  const warn = $('[data-order-warn]', form)!;
+  const submit = $<HTMLButtonElement>('button[type="submit"]', form)!;
+  const mode = () => (form.querySelector<HTMLInputElement>('input[name="mode"]:checked')?.value === 'dinein' ? 'dinein' : 'pickup');
+
+  function fillTimes() {
+    const prev = time.value;
+    time.innerHTML = '';
+    const pickup = mode() === 'pickup';
+    // Abholen: 15-Minuten-Takt, frühestens 15 Min. nach Öffnung, bis 15 Min. vor Schließung
+    // Vor Ort: wie Reservierung (30-Minuten-Takt, bis 1 Stunde vor Schließung)
+    const { options, special, tooLate } = date.value
+      ? pickup ? timeSlots(date.value, 15, 15, 15) : timeSlots(date.value, 30, 0, 60)
+      : { options: [] as string[], special: undefined, tooLate: false };
+    for (const v of options) time.add(new Option(v, v, false, v === prev));
+    if (!time.value && options.length) time.value = options[0];
+    const closed = options.length === 0;
+    warn.textContent = closedMessage(special, tooLate);
+    warn.hidden = !closed;
+    time.disabled = closed;
+    submit.disabled = closed || lines.length === 0;
+    timeLabel.textContent = pickup ? ocfg.pickupTime : ocfg.arrivalTime;
+    personsField.hidden = pickup;
+  }
+  form.addEventListener('change', (e) => {
+    const t = e.target as HTMLInputElement;
+    if (t.name === 'mode' || t.name === 'date') fillTimes();
+  });
+
+  function showForm() {
+    done.hidden = true;
+    main.hidden = false;
+  }
+  fab.addEventListener('click', () => {
+    const today = nowInRestaurant().iso;
+    date.min = today;
+    if (!date.value || date.value < today) date.value = today;
+    showForm();
+    render();
+    fillTimes();
+    dlg.showModal();
+  });
+  dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = form.elements.namedItem('name') as HTMLInputElement;
+    if (!name.value.trim()) { name.focus(); name.reportValidity(); return; }
+    if (!lines.length || !time.value) return;
+    const data = new FormData(form);
+    const items = lines
+      .map((l) => `• ${l.qty}× ${l.nameDe}${l.size ? ` (${l.size})` : ''} – ${money.format(l.qty * l.price)}`)
+      .join('\n');
+    const modeText = mode() === 'pickup' ? ocfg.pickupLine : ocfg.dineInLine.replace('{persons}', String(data.get('persons')));
+    const dateText = new Intl.DateTimeFormat(cfg.locale, { weekday: 'long', day: 'numeric', month: 'long' })
+      .format(new Date(`${date.value}T12:00:00`));
+    const note = String(data.get('note') || '').trim();
+    const text = ocfg.template
+      .replaceAll('{restaurant}', cfg.restaurant)
+      .replaceAll('{items}', items)
+      .replaceAll('{total}', money.format(total()))
+      .replaceAll('{mode}', modeText)
+      .replaceAll('{name}', name.value.trim())
+      .replaceAll('{date}', dateText)
+      .replaceAll('{time}', time.value)
+      .replaceAll('{note}', note ? `📝 ${cfg.noteLabel}: ${note}\n` : '');
+    const url = `https://wa.me/${cfg.whatsapp}?text=${encodeURIComponent(text)}`;
+    const win = window.open(url, '_blank', 'noopener');
+    if (!win) location.href = url;
+    // Warenkorb erst leeren, wenn der Gast es bestätigt (falls WhatsApp nicht gesendet wurde)
+    main.hidden = true;
+    done.hidden = false;
+  });
+  $('[data-order-clear]', dlg)!.addEventListener('click', () => {
+    lines = [];
+    save();
+    render();
+    form.reset();
+    dlg.close();
+  });
+  $('[data-order-back]', dlg)!.addEventListener('click', showForm);
+
+  render();
 })();
 
 /* ------------------------------------------------------- Suche & Filter */
