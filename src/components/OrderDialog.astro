@@ -14,8 +14,15 @@ const { lang } = Astro.props;
 const t = useT(lang);
 const enabled = site.orderEnabled !== false;
 
+// Fallback, falls die Vorlage im Admin geleert wurde oder fehlt (sonst bricht „Bestellen“ ab)
+const DEFAULT_TEMPLATE: Record<string, string> = {
+  de: 'Hallo {restaurant}, ich möchte gerne bestellen:\n\n{items}\n\n💶 Summe: {total} (Bezahlung an der Kasse)\n{mode}\n👤 Name: {name}\n📅 Datum: {date}\n🕖 Uhrzeit: {time}\n{note}\nVielen Dank!',
+  en: 'Hello {restaurant}, I would like to order:\n\n{items}\n\n💶 Total: {total} (payment at the counter)\n{mode}\n👤 Name: {name}\n📅 Date: {date}\n🕖 Time: {time}\n{note}\nThank you!',
+  nl: 'Hallo {restaurant}, ik wil graag bestellen:\n\n{items}\n\n💶 Totaal: {total} (betalen aan de kassa)\n{mode}\n👤 Naam: {name}\n📅 Datum: {date}\n🕖 Tijd: {time}\n{note}\nHartelijk dank!',
+};
+
 const config = {
-  template: loc(site, 'orderTemplate', lang) || site.orderTemplate,
+  template: loc(site, 'orderTemplate', lang) || site.orderTemplate || DEFAULT_TEMPLATE[lang] || DEFAULT_TEMPLATE.de,
   pickupLine: t('order.pickupLine'),
   dineInLine: t('order.dineInLine'),
   pickupTime: t('order.pickupTime'),

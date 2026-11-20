@@ -7,10 +7,17 @@ const { lang } = Astro.props;
 const t = useT(lang);
 
 // Alles, was das Skript zum Bauen des WhatsApp-Links braucht – Nummer kommt NUR aus site.json
+// Fallback, falls die Vorlage im Admin geleert wurde oder fehlt (sonst bricht „Reservieren“ ab)
+const DEFAULT_TEMPLATE: Record<string, string> = {
+  de: 'Hallo {restaurant}, ich möchte gerne einen Tisch reservieren:\n\n👤 Name: {name}\n👥 Personen: {persons}\n📅 Datum: {date}\n🕖 Uhrzeit: {time}\n{note}\nVielen Dank!',
+  en: 'Hello {restaurant}, I would like to book a table:\n\n👤 Name: {name}\n👥 Guests: {persons}\n📅 Date: {date}\n🕖 Time: {time}\n{note}\nThank you!',
+  nl: 'Hallo {restaurant}, ik wil graag een tafel reserveren:\n\n👤 Naam: {name}\n👥 Personen: {persons}\n📅 Datum: {date}\n🕖 Tijd: {time}\n{note}\nHartelijk dank!',
+};
+
 const config = {
   whatsapp: site.whatsapp,
   restaurant: site.name,
-  template: loc(site, 'reservationTemplate', lang) || site.reservationTemplate,
+  template: loc(site, 'reservationTemplate', lang) || site.reservationTemplate || DEFAULT_TEMPLATE[lang] || DEFAULT_TEMPLATE.de,
   locale: LANG_META[lang].locale,
   timezone: site.timezone || 'Europe/Vienna',
   hours: weeklyHours(),
