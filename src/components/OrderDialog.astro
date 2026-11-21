@@ -98,8 +98,7 @@ const config = {
         <h3>{t('order.doneTitle')}</h3>
         <p>{t('order.doneText')}</p>
         <div class="order-done-actions">
-          <button type="button" class="btn btn-primary" data-order-clear>{t('order.clear')}</button>
-          <button type="button" class="btn btn-outline" data-order-back>{t('order.back')}</button>
+          <button type="button" class="btn btn-primary" data-order-close>{t('order.close')}</button>
         </div>
       </div>
       <script type="application/json" id="order-config" set:html={JSON.stringify(config)} />

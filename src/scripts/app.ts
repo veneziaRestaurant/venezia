@@ -249,17 +249,36 @@ const closedMessage = (special?: { reason: string }, tooLate = false) =>
     });
   }
 
-  // Warenkorb aus dem Browser laden – Preise immer frisch von der Seite, entfernte Artikel fallen raus
+  // Warenkorb aus dem Browser laden – verfällt 24 Stunden nach der letzten Änderung.
+  // Preise immer frisch von der Seite, entfernte Artikel fallen raus.
+  const MAX_AGE = 24 * 60 * 60 * 1000;
   let lines: Line[] = [];
+  let cartAt = Date.now();
   try {
-    const saved = JSON.parse(localStorage.getItem(STORE) || '[]');
-    if (Array.isArray(saved))
-      lines = saved
-        .filter((l) => l && catalog.has(l.key) && Number(l.qty) > 0)
-        .map((l) => ({ ...catalog.get(l.key)!, qty: Math.min(99, Math.floor(Number(l.qty))) }));
+    const saved = JSON.parse(localStorage.getItem(STORE) || 'null');
+    const age = Date.now() - Number(saved?.at);
+    if (saved && age >= 0 && age < MAX_AGE && Array.isArray(saved.lines)) {
+      cartAt = Number(saved.at);
+      lines = saved.lines
+        .filter((l: any) => l && catalog.has(l.key) && Number(l.qty) > 0)
+        .map((l: any) => ({ ...catalog.get(l.key)!, qty: Math.min(99, Math.floor(Number(l.qty))) }));
+    } else localStorage.removeItem(STORE);
   } catch {}
   const save = () => {
-    try { localStorage.setItem(STORE, JSON.stringify(lines.map(({ key, qty }) => ({ key, qty })))); } catch {}
+    cartAt = Date.now();
+    try {
+      if (lines.length)
+        localStorage.setItem(STORE, JSON.stringify({ at: cartAt, lines: lines.map(({ key, qty }) => ({ key, qty })) }));
+      else localStorage.removeItem(STORE);
+    } catch {}
+  };
+  // Seite lange offen gelassen? Dann beim nächsten Hinschauen leeren.
+  const expireIfOld = () => {
+    if (lines.length && Date.now() - cartAt >= MAX_AGE) {
+      lines = [];
+      save();
+      render();
+    }
   };
 
   const money = new Intl.NumberFormat(cfg.locale, { style: 'currency', currency: 'EUR' });
@@ -390,7 +409,10 @@ const closedMessage = (special?: { reason: string }, tooLate = false) =>
     done.hidden = true;
     main.hidden = false;
   }
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) expireIfOld(); });
   fab.addEventListener('click', () => {
+    expireIfOld();
+    if (!lines.length) return;
     const today = nowInRestaurant().iso;
     date.min = today;
     if (!date.value || date.value < today) date.value = today;
@@ -426,18 +448,15 @@ const closedMessage = (special?: { reason: string }, tooLate = false) =>
     const url = `https://wa.me/${cfg.whatsapp}?text=${encodeURIComponent(text)}`;
     const win = window.open(url, '_blank', 'noopener');
     if (!win) location.href = url;
-    // Warenkorb erst leeren, wenn der Gast es bestätigt (falls WhatsApp nicht gesendet wurde)
-    main.hidden = true;
-    done.hidden = false;
-  });
-  $('[data-order-clear]', dlg)!.addEventListener('click', () => {
+    // Nach dem Bestellen ist der Warenkorb sofort leer
     lines = [];
     save();
     render();
     form.reset();
-    dlg.close();
+    main.hidden = true;
+    done.hidden = false;
   });
-  $('[data-order-back]', dlg)!.addEventListener('click', showForm);
+  $('[data-order-close]', dlg)!.addEventListener('click', () => dlg.close());
 
   render();
 })();

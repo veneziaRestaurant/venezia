@@ -2,7 +2,8 @@
 /**
  * VORLAGE Datenschutzerklärung (DSGVO). Auf die tatsächliche Nutzung abgestimmt:
  * keine Cookies, keine Analyse-Tools, lokal eingebundene Schriften, Google Maps erst nach Klick,
- * Reservierung über WhatsApp (Datenübermittlung erst, wenn der Gast selbst WhatsApp öffnet).
+ * Reservierung und Bestellung über WhatsApp (Datenübermittlung erst, wenn der Gast selbst WhatsApp öffnet),
+ * Warenkorb nur im Browser (localStorage, max. 24 Stunden).
  * Hinweis: Keine Rechtsberatung. Bei Erweiterungen (z. B. Analytics) bitte anpassen.
  */
 import LegalPage from '../components/LegalPage.astro';
@@ -22,10 +23,18 @@ import { site, fullAddress } from '../lib/content';
   <p>Alle Schriften sind lokal auf unserem Server eingebunden. Es wird keine Verbindung zu Google Fonts oder anderen Schrift-Anbietern aufgebaut.</p>
 
   <h2>Lokaler Speicher (kein Cookie)</h2>
-  <p>Wenn Sie zwischen hellem und dunklem Design wechseln, wird Ihre Auswahl ausschließlich in Ihrem Browser (localStorage) gespeichert und nicht an uns übertragen. Dies ist für die von Ihnen gewünschte Funktion unbedingt erforderlich (§ 165 Abs. 3 TKG 2021).</p>
+  <p>Diese Webseite speichert in Ihrem Browser (localStorage) nur, was für die von Ihnen genutzten Funktionen unbedingt erforderlich ist (§ 165 Abs. 3 TKG 2021). Diese Daten werden nicht an uns übertragen:</p>
+  <ul>
+    <li><strong>Design:</strong> Ihre Wahl zwischen hellem und dunklem Design.</li>
+    <li><strong>Warenkorb:</strong> die Gerichte und Stückzahlen, die Sie zum Bestellen ausgewählt haben, sowie der Zeitpunkt der letzten Änderung. Es werden dabei keine persönlichen Angaben wie Ihr Name gespeichert. Der Warenkorb wird automatisch gelöscht, sobald Sie die Bestellung an WhatsApp übergeben, spätestens aber 24 Stunden nach der letzten Änderung.</li>
+  </ul>
+  <p>Sie können diese Daten jederzeit über die Browser-Einstellungen (Websitedaten löschen) entfernen.</p>
 
   <h2>Tischreservierung über WhatsApp</h2>
   <p>Das Reservierungsformular speichert und versendet keine Daten über diese Webseite. Ihre Eingaben (Name, Personenzahl, Datum, Uhrzeit, Anmerkung) werden nur in Ihrem Browser zu einer Nachricht zusammengesetzt. Erst wenn Sie auf „Weiter zu WhatsApp" tippen, öffnet sich WhatsApp (WhatsApp Ireland Ltd., Meta) und Sie entscheiden selbst, ob Sie die Nachricht absenden. Für die Verarbeitung durch WhatsApp gilt dessen Datenschutzerklärung. Wir verwenden Ihre Nachricht ausschließlich zur Bearbeitung der Reservierung (Art. 6 Abs. 1 lit. b DSGVO) und löschen sie, sobald sie dafür nicht mehr benötigt wird.</p>
+
+  <h2>Bestellung über WhatsApp</h2>
+  <p>Das Bestellformular speichert und versendet keine Daten über diese Webseite. Ihre Auswahl (Gerichte, Mengen, Preise) und Ihre Eingaben (Name, Abholung oder Essen vor Ort, Personenzahl, Datum, Uhrzeit, Anmerkung) werden nur in Ihrem Browser zu einer Nachricht zusammengesetzt. Erst wenn Sie auf „Per WhatsApp bestellen" tippen, öffnet sich WhatsApp (WhatsApp Ireland Ltd., Meta) und Sie entscheiden selbst, ob Sie die Nachricht absenden. Für die Verarbeitung durch WhatsApp gilt dessen Datenschutzerklärung. Wir verwenden Ihre Nachricht ausschließlich zur Bearbeitung Ihrer Bestellung (Art. 6 Abs. 1 lit. b DSGVO) und löschen sie, sobald sie dafür und für gesetzliche Aufbewahrungspflichten nicht mehr benötigt wird.</p>
 
   <h2>Google Maps (nur nach Ihrer Einwilligung)</h2>
   <p>Die Karte wird erst geladen, wenn Sie auf „Karte laden" klicken. Dabei werden Daten (u. a. Ihre IP-Adresse) an Google Ireland Ltd. bzw. Google LLC (USA) übertragen. Rechtsgrundlage ist Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), die Sie jederzeit durch Neuladen der Seite widerrufen können. Der Link „Route" sowie „Auf Google bewerten" führen Sie auf Google-Seiten; dort gilt die Datenschutzerklärung von Google.</p>
